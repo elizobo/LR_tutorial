@@ -35,7 +35,7 @@ We often have work with binary data in ecology. Whether measuring germination su
 
 By classifying the binary variable outcomes as 0 and 1, logistic regression can use *maximum likelihood estimation* to calculate the probability that a given observation will take on a value of 1. Binomial logistic regression is a binomial regression but with a logit link function to make the relationship between the predictor and response variables linear. If you want to go into more of the maths have a read \<a href="<https://medium.com/deep-math-machine-learning-ai/chapter-2-0-logistic-regression-with-math-e9cbb3ec6077>["](https://portal.edirepository.org/nis/home.jsp%22) target="\_blank"\> here</a>, otherwise this tutorial can give you all you need to get your report underway from raw data to results.
 
-You can get all of the resources for this tutorial from <a href="https://github.com/EdDataScienceEES/tutorial-elizobo.git" target="_blank">this GitHub repository</a>. Clone and download the repo as a zip file, then unzip it.
+You can get all of the resources for this tutorial from <a href="https://github.com/elizobo/LR_tutorial" target="_blank">this GitHub repository</a>. Clone and download the repo as a zip file, then unzip it.
 
 ### Data: Conifer cones
 
