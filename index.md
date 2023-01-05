@@ -1,15 +1,11 @@
----
-title: "Logistic Regression Tutorial : working with binomial data"
-author: "Elizabeth Stroud"
-date: '2022-12-20'
-output: markdown
----
+# Binomial Logistic Regression Tutorial
 
-\<center\>
-
-![Subalpine fir forest (photo credit: <a href="https://www.flickr.com/photos/codiferous/7978232221/in/photostream/" target="_blank">C. Hinchliff</a>.](images/subalp_forest.jpeg){alt="Img" style="width: 1000px;"}
-
-\</center\>
+<p align="center">
+  <img src="https://github.com/elizobo/LR_tutorial/blob/master-branch/images/subalp_forest.jpeg" alt="drawing" width="75%">
+</p>
+<p align="center">
+  Subalpine fir forest (photo credit: <a href="https://www.flickr.com/photos/codiferous/7978232221/in/photostream/" target="_blank">C. Hinchliff</a>).
+</p>
 
 ### Tutorial Aims
 
@@ -47,13 +43,18 @@ For this tutorial we'll be looking into reproductive maturity of conifers. There
 
 Our dataset is a mixture of cone abundance from Subalpine fir, *Abies lasiocarpa*, and Engleman spruce, *Picea engelmannii* from southern Rocky Mountains, USA. The data is from this <a href="https://portal.edirepository.org/nis/home.jsp" target="_blank"> neat open source database site </a>.
 
-<center>
 
-![Img](images/engelman_cone2.jpeg){alt="Img" style="height: 200px;"} ![Img](images/subalpfir_cone.jpeg){alt="Img" style="height: 200px;"}
+<p align="center">
 
-*Engleman spruce seed cones (photo credit:* <a href="https://https://www.conifers.org/pi/Picea_engelmannii.php" target="_blank"> C. Earle </a>) *Subalpine fir seed cones (photo credit:* <a href="https://www.flickr.com/photos/76416226@N03/6881892262" target="_blank"> B. Leystra </a>)
+  |<img src="https://github.com/elizobo/LR_tutorial/blob/master-branch/images/engelman_cone2.jpeg" alt="drawing" width="70%" > | <img src="https://github.com/elizobo/LR_tutorial/blob/master-branch/images/subalpfir_cone.jpeg" alt="drawing" width="100%" >|
+  |:---:|:---:|
+  |Engleman spruce seed cones (photo credit: <a href="https://https://www.conifers.org/pi/Picea_engelmannii.php" target="_blank"> C. Earle </a>) |Subalpine fir seed cones (photo credit: <a href="https://www.flickr.com/photos/76416226@N03/6881892262" target="_blank"> B. Leystra </a>)|
 
-</center>
+<pre>
+
+
+</pre>
+
 
 First we'll set up the RStudio working environment and load in this data.
 
@@ -129,9 +130,14 @@ The summary() function displays a summary statistics of data for each column:
 
 What effects conifer reproductive maturity? If cone presence is an indicator of reproductive maturity, what are the predictor and response variables available here to answer our question?
 
-<a name="#section1"></a>
+<a name="section1"></a>
 
-## 1. Check assumptions of logistic regression
+<pre>
+
+
+</pre>
+
+## 1. Check assumptions of binomial logistic regression
 
 Before making a logistic regression model you have to check your data is suited for it. There are 6 assumptions we'll work through.
 
@@ -186,12 +192,12 @@ correlations <-  cor(conesbi[,4:5]) # extract continuous predictors for correlat
 correlations # print correlation value (closer to 1 or -1 indicates strong +ve or -ve value)
 corrplot(correlations, method="circle") # create circle plot showing correlation
 ```
-
-<center>
-
-![Correlation plot for explanatory variables.](images/corrplot.png){alt="Img" style="width: 1000px;"}
-
-</center>
+<p align="center">
+   <img src="https://github.com/elizobo/LR_tutorial/blob/master-branch/images/corrplot.png" alt="drawing" width="50%">
+</p>
+<p align="center">
+  Correlation plot for the models potential explanatory variables.
+</p>
 
 There is a very strong positive relationship between tree age and DBH. Including them both in this model would violate this assumption, so they must be incorporated in models separately.
 
@@ -209,21 +215,25 @@ We will get an idea of any potential outliers by seeing if we have a good repres
 boxplot(conesbi$DBH, main = "Boxplot")
 ```
 
-<center>
-
-![Distribution of explanatory Diamater at Breast Height data with outliers highlighted as circles.](images/outlier_box.png){alt="Img" style="width: 1000px;"}
-
-</center>
+<p align="center">
+   <img src="https://github.com/elizobo/LR_tutorial/blob/master-branch/images/outlier_box.png" alt="drawing" width="50%">
+</p>
+<p align="center">
+  Distribution of explanatory Diamater at Breast Height data with outliers highlighted as circles.
+</p>
 
 We can see there is a general under representation of older trees which may lead to outliers of our model. We will keep this in mind and check this assumption again using cooks distance test once we've built our model.
 
 **Assumption 5. There is a linear relationship between the explanatory variable and the logit of the response variable**
 
-To ensure the data relationship fits a binomial distribution there must be a linear relationship between the explanatory variable and the logit of the response variable. The logit is the..... So in graph for this would look like:
+To ensure the data relationship fits a binomial distribution there must be a linear relationship between the explanatory variable and the logit of the response variable. The logit function describes the S-shape (sigmoid curve) seen in logistic regression curves. 
 
-#Logit(p) = log(p / (1-p)) where p is the probability of a positive outcome.
+<p align="center">
+  **Logit(p) = log(p / (1-p))** 
+</p>
+              where p is the probability of a positive outcome.
 
-We will test this through a Box Tidwell test.
+We will test this relationship through a Box Tidwell test.
 
 ``` r
 # Test linear explanatory~logit(response) relationship
@@ -259,9 +269,15 @@ ASSUMPTION MET: We will include less than 62 explanatory variables in the model.
 
 Great! With all these assumptions met we know our data is suitable for a logistic regression and we can get along with building our model.
 
-<a name="#section2"></a>
+<pre>
 
-## 2. Build a frequentest logistic regression model
+
+
+</pre>
+
+<a name="section2"></a>
+
+## 2. Build a binomial logistic regression model
 
 Before building your model, remind yourself of your research question :
 
@@ -269,21 +285,15 @@ Before building your model, remind yourself of your research question :
 
 Make sure you know your response variable, explanatory variable(s) and random effects and their names within the model.
 
-+-----------------------+--------------------------------------------------------------------+-----------------+
-| Model parameter type  | Our model parameter                                                | Name in Rscript |
-+=======================+====================================================================+=================+
-| Response variable     | -   conifer reproductive maturity, indicated by seed cone presence | -   Presence    |
-+-----------------------+--------------------------------------------------------------------+-----------------+
-| Explanatory variables | -   tree size                                                      | -   Age         |
-|                       |                                                                    |                 |
-|                       | -   conifer tree species                                           | -   Spec        |
-+-----------------------+--------------------------------------------------------------------+-----------------+
-| Random effects        | -   individual tree                                                | -   ID          |
-|                       |                                                                    |                 |
-|                       | -   plot of trees                                                  | -   Plot        |
-|                       |                                                                    |                 |
-|                       | -   measurement year                                               | -   Year        |
-+-----------------------+--------------------------------------------------------------------+-----------------+
+| **Model parameter type**  | Our model parameter                                              | Name in Rscript |
+|---------------------------|------------------------------------------------------------------|-----------------|
+| **Response variable**     | - conifer reproductive maturity, indicated by seed cone presence | - Presence      |
+| **Explanatory variables** | - tree size                                                      | - Age           |
+|                           | - conifer tree species                                           | - Spec          |
+| **Random effects**        | - individual tree                                                | - ID            |
+|                           | - plot of trees                                                  | - Plot          |
+|                           | - measurement year                                               | - Year          |
+
 
 #### **Check out the data**
 
@@ -310,11 +320,13 @@ ggplot(data_dist, aes(factor(Presence), y = value, fill=factor(Presence))) +
         legend.text = element_text(size = 30))
 ```
 
-<center>
 
-![Distribution plot for continuous explanatory variable.](images/distrib1.png){alt="Img" style="width: 1000px;"}
-
-</center>
+<p align="center">
+   <img src="https://github.com/elizobo/LR_tutorial/blob/master-branch/images/distrib1.png" alt="drawing" width="50%">
+</p>
+<p align="center">
+  Distribution plot for the continuous explanatory variable.
+</p>
 
 This plot shows there are more cases of cone presence for larger trees but there is quite a lot of overlap with cases of cone presence and absence for the full range of DBH values.
 
@@ -335,13 +347,19 @@ ggplot(conesbi, aes(x = DBH, y = Presence, colour = Spec)) +
         legend.text = element_text(size = 20))
 ```
 
-<center>
-
-![Distribution plot for continuous and categorical explanatory variables.](images/distrib2.png){alt="Img" style="width: 1000px;"}
-
-</center>
+<p align="center">
+   <img src="https://github.com/elizobo/LR_tutorial/blob/master-branch/images/distrib2.png" alt="drawing" width="50%">
+</p>
+<p align="center">
+  Distribution plot for continuous and categorical explanatory variables.
+</p>
 
 The Engleman spruce appears to have more observations of cone presence than Subalpine fir, but there is a lot of overlap and no obvious trend for either species. There are also fewer observations for larger than smaller trees and the size range of Subalpine fir does not range as large as Engleman spruce. This is likely to make model predictions of larger trees less trustworthy as it is based on less data.
+
+<pre>
+
+
+</pre>
 
 #### **Modelling**
 
@@ -388,7 +406,12 @@ AICc(null.mod, dbh.mod, dbh.mod.int)
 
 This prints the AICc values of all the models with dbh.mod having the lowest. This shows that including the fixed effects individually gives us the strongest model.
 
-<a name="#section3"></a>
+<pre>
+
+
+</pre>
+
+<a name="section3"></a>
 
 ## 3. Testing a logistic regression model
 
@@ -405,12 +428,12 @@ We'll create a simple general linear model (without the random effects so not a 
 model <- glm(Presence ~ DBH + Spec, family = "binomial", data = conesbi)
 CookD(model) # this might pop up in another window
 ```
-
-<center>
-
-![Cooks distance plot with outliers labeled with reference numbers.](images/cooks_d.png){alt="Img" style="width: 1000px;"}
-
-</center>
+<p align="center">
+   <img src="https://github.com/elizobo/LR_tutorial/blob/master-branch/images/cooks_d.png" alt="drawing" width="50%">
+</p>
+<p align="center">
+  Cooks distance plot with outliers labeled with reference numbers.
+</p>
 
 There are 3 possible outliers here. The index labels allow you to find them in the dataframe and check with metadata if there is any reason for removal. As there isn't with these we'll keep them in and bear this in mind when reporting any results.
 
@@ -450,12 +473,12 @@ Find the optimum cutoff probability of the model - the point on the explanatory 
 # Compute a confusion matrix comparing the predicted model outcomes to the real outcomes for the test dataset
 confusionMatrix(data = as.factor(as.numeric(pdata>0.5)), reference = as.factor(test$Presence))  # the extracted predictions are probabilities and must be set as numerical 1/0 factors to match the original test data
 ```
-
-<center>
-
-![Annotated confusion matrix report in Rstudio](images/conf_matrix.png){alt="Img" style="width: 100000px;"}
-
-</center>
+<p align="center">
+   <img src="https://github.com/elizobo/LR_tutorial/blob/master-branch/images/conf_matrix.png" alt="drawing" width="100%">
+</p>
+<p align="center">
+  Annotated confusion matrix report in Rstudio.
+</p>
 
 This shows the number of unmatching outcomes are low, showing the model is pretty strong. We can also quantify this by calculating the misclassification rate.
 
@@ -479,9 +502,14 @@ predict(train.mod, new, type="response")  # print model predicted probability of
 
 This prints 0.1113638, meaning a tree with these attributes would have 11% likelihood of having seed cones.
 
-<a name="#section4"></a>
+<pre>
 
-## 4. Present and report model results
+
+</pre>
+
+<a name="section4"></a>
+
+## 4. Presenting and reporting model results
 
 Now we know our model is pretty good we can draw any results from it. First we'll look at the model summary.
 
@@ -489,12 +517,12 @@ Now we know our model is pretty good we can draw any results from it. First we'l
 # Look at the model outcomes
 summary(dbh.mod)
 ```
-
-<center>
-
-![Annotated model summary report](images/mod_summary.png){alt="Img" style="width: 100000px;"}
-
-</center>
+<p align="center">
+   <img src="https://github.com/elizobo/LR_tutorial/blob/master-branch/images/mod_summary.png" alt="drawing" width="100%">
+</p>
+<p align="center">
+  Annotated model summary report.
+</p>
 
 Everything is annotated here but all you'll probably use is the numbers in the second section down to compare potential models and the fixed effects summary for checking significance. However it's kind of out of fashion to report p-values. Instead we'll report the odds ratio and associated confidence intervals.
 
@@ -521,23 +549,29 @@ plot_model(dbh.mod,
            show.values = TRUE)
 ```
 
-<center>
+<p align="center">
+   <img src="https://github.com/elizobo/LR_tutorial/blob/master-branch/images/CI_sumtab.png" alt="drawing" width="70%">
+</p>
+<p align="center">
+  Summary reporting statistics (tab_model output).
+</p>
 
-![Summary reporting statistics (tab_model output)](images/CI_sumtab.png){alt="Img" style="width: 600px;"}
-
-</center>
-
-<center>
-
-![Odds ratio plot for final model fixed effects, DBH (tree diameter at breast height) and Spec (tree species, Engleman spruce in comparison to Subalpine fir). The odds ratio is represented by the red circle and 95% confidence interval by the horizontal red line. The odds ratio value is labeled on the plot and significance represented by asterisks.](images/odds_plot.png){alt="Img" style="width: 100000px;"}
-
-</center>
+<p align="center">
+   <img src="https://github.com/elizobo/LR_tutorial/blob/master-branch/images/odds_plot.png" alt="drawing" width="70%">
+</p>
+<p align="center">
+  Odds ratio plot for final model fixed effects, DBH (tree diameter at breast height) and Spec (tree species, Engleman spruce in comparison to Subalpine fir). The odds ratio is represented by the red circle and 95% confidence interval by the horizontal red line. The odds ratio value is labeled on the plot and significance represented by asterisks.
+</p>
 
 We can then report :
 
 -   A 1cm increase in tree DBH increases likelihood of cone presence by 16% (95% CI [.13, .19]; Figure 1). We can conclude tree size is a strong predictor of reproductive maturity.
 
 -   Engleman spruce are 157% more likely to have seed cone presence than Subalpine fir (95% CI [.72, 2.84]; Figure 2).
+
+<pre>
+
+</pre>
 
 You want to present your models predictions. We can create marginal effects plots to show this.
 
@@ -571,14 +605,14 @@ You want to present your models predictions. We can create marginal effects plot
            height = 15, 
            units = 'in')
 ```
+<p align="center">
+   <img src="https://github.com/elizobo/LR_tutorial/blob/master-branch/images/p_cone_dbh.png" alt="drawing" width="70%">
+</p>
+<p align="center">
+  Presenting a prediction distribution plot with 95% confidence intervals.
+</p>
 
-<center>
-
-![Presenting a prediction distribution plot with 95% confidence intervals](images/p_cone_dbh.png){alt="Img" style="width: 1000px;"}
-
-</center>
-
-If your categorical predictor is significant you may want to show marginal effects for each separate category.
+If your categorical predictor is significant you might want to show marginal effects for each separate category.
 
 ``` r
 # Make a plot with separate predictions for each categorical variable
@@ -620,21 +654,28 @@ ggsave(filename = 'images/p_cone_dbh_sp.png',
        units = 'in')
 ```
 
-<center>
+<p align="center">
+   <img src="https://github.com/elizobo/LR_tutorial/blob/master-branch/images/p_cone_dbh_sp.png" alt="drawing" width="70%">
+</p>
+<p align="center">
+  Presenting a prediction distribution plot with 95% confidence intervals.
+</p>
 
-![Presenting a prediction distribution plot with 95% confidence intervals](images/p_cone_dbh_sp.png){alt="Img" style="width: 1000px;"}
+<pre>
 
-</center>
+
+</pre>
 
 ## The End
 
 This is the end of the tutorial. taadaa now you can have a walk outside, cup of tea and an unholy number of oreos then go get started on that report. Good job.
 
-<center>
-
-![Engleman spruce forest (photo credit: <a href="http://nativeplantspnw.com/about-me/" target="_blank">D. Bressette</a>.](images/Spruce-habitat.jpeg){alt="Img" style="width: 1000px;"}
-
-</center>
+<p align="center">
+   <img src="https://github.com/elizobo/LR_tutorial/blob/master-branch/images/Spruce-habitat.jpeg" alt="drawing" width="75%">
+</p>
+<p align="center">
+  Engleman spruce forest (photo credit: <a href="http://nativeplantspnw.com/about-me/" target="_blank">D. Bressette</a>)
+</p>
 
 In this tutorial you learned how to:
 
