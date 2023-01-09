@@ -1,6 +1,9 @@
 # Binomial Logistic Regression Tutorial
 
 <p align="center">
+   <img src="{{ site.baseurl }}/images/subalp_forest.png" alt="drawing" width="50%">
+</p>
+<p align="center">
   <img src="{{ site.baseurl }}/images/subalp_forest.png" alt="drawing" width="75%"">
 </p>
 <p align="center">
