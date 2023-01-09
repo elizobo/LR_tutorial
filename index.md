@@ -1,10 +1,7 @@
 # Binomial Logistic Regression Tutorial
 
 <p align="center">
-   <img src="{{ site.baseurl }}/images/subalp_forest.png" alt="drawing" width="50%">
-</p>
-<p align="center">
-  <img src="{{ site.baseurl }}/images/subalp_forest.png" alt="drawing" width="75%"">
+   <img src="{{ site.baseurl }}/images/subalp_forest.png" alt="drawing" width="75%">
 </p>
 <p align="center">
   Subalpine fir forest (photo credit: <a href="https://www.flickr.com/photos/codiferous/7978232221/in/photostream/" target="_blank">C. Hinchliff</a>).
@@ -48,10 +45,15 @@ Our dataset is a mixture of cone abundance from Subalpine fir, *Abies lasiocarpa
 
 
 <p align="center">
+   <p align="center">
+   <img src="{{ site.baseurl }}/images/subalp_forest.png" alt="drawing" width="75%">
+</p>
 
-  |<img src="{{ site.baseurl }}/images/engelman_cone2.png" alt="drawing" width="70%" > | <img src="{{ site.baseurl }}/images/subalpfir_cone.png" alt="drawing" width="100%" >|
-  |:---:|:---:|
-  |Engleman spruce seed cones (photo credit: <a href="https://https://www.conifers.org/pi/Picea_engelmannii.php" target="_blank"> C. Earle </a>) |Subalpine fir seed cones (photo credit: <a href="https://www.flickr.com/photos/76416226@N03/6881892262" target="_blank"> B. Leystra </a>)|
+
+  <img src="{{ site.baseurl }}/images/engelman_cone2.png" alt="drawing" width="70%" > | <img src="{{ site.baseurl }}/images/subalpfir_cone.png" alt="drawing" width="100%" >
+  - | -
+  Engleman spruce seed cones (photo credit: <a href="https://https://www.conifers.org/pi/Picea_engelmannii.php" target="_blank"> C. Earle </a>) | Subalpine fir seed cones (photo credit: <a href="https://www.flickr.com/photos/76416226@N03/6881892262" target="_blank"> B. Leystra </a>)
+
 
 <pre>
 
