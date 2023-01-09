@@ -1,10 +1,7 @@
 # Binomial Logistic Regression Tutorial
 
-<center><img src="{{ site.baseurl }}/images/corrplot.png" alt="Img"></center>
-
 <p align="center">
-  <img src="{{ site.baseurl }}/images/subalp_forest.jpeg" alt="Img">
-  <img src="https://github.com/elizobo/LR_tutorial/blob/master-branch/images/subalp_forest.jpeg" alt="drawing" width="75%">
+  <img src="{{ site.baseurl }}/images/subalp_forest.jpeg" alt="drawing" width="75%"">
 </p>
 <p align="center">
   Subalpine fir forest (photo credit: <a href="https://www.flickr.com/photos/codiferous/7978232221/in/photostream/" target="_blank">C. Hinchliff</a>).
