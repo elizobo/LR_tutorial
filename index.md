@@ -52,7 +52,7 @@ Our dataset is a mixture of cone abundance from Subalpine fir, *Abies lasiocarpa
 
   <img src="{{ site.baseurl }}/images/engelman_cone2.png" alt="drawing" width="70%" > | <img src="{{ site.baseurl }}/images/subalpfir_cone.png" alt="drawing" width="100%" >
   - | -
-  Engleman spruce seed cones (photo credit: <a href="https://https://www.conifers.org/pi/Picea_engelmannii.php" target="_blank"> C. Earle </a>) | Subalpine fir seed cones (photo credit: <a href="https://www.flickr.com/photos/76416226@N03/6881892262" target="_blank"> B. Leystra </a>)
+   Engleman spruce seed cones (photo credit: <a href="https://https://www.conifers.org/pi/Picea_engelmannii.php" target="_blank"> C. Earle </a>) | Subalpine fir seed cones (photo credit: <a href="https://www.flickr.com/photos/76416226@N03/6881892262" target="_blank"> B. Leystra </a>)
 
 
 <pre>
