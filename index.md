@@ -697,7 +697,9 @@ Not sure if you understood anything you just read? Check yourself by doing the..
 
 For some conifers, tree size has been shown to be a better indicator of cone production than tree age. This is possibly because tree size more strongly reflects a tree's access to resources than tree age.
 
-See if this is true for this data by building a model using the tree age predictor variable instead of DBH. Is tree age a predictor of reproductive maturity for these confiers? Is it a stronger predictor than tree size? Does this differ between species?
+See if this is true for this data by building a model using the tree age predictor variable instead of DBH. 
+  - Is tree age a predictor of reproductive maturity for these confiers? 
+  - Is it a stronger predictor than tree size? Does this differ between species?
 
 <hr>
 
