@@ -1,5 +1,7 @@
 # Binomial Logistic Regression Tutorial
 
+<center><img src="{{ site.baseurl }}/images/corrplot.png" alt="Img"></center>
+
 <p align="center">
   <img src="{{ site.baseurl }}/images/subalp_forest.jpeg" alt="Img">
   <img src="https://github.com/elizobo/LR_tutorial/blob/master-branch/images/subalp_forest.jpeg" alt="drawing" width="75%">
