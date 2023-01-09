@@ -190,7 +190,14 @@ plot_theme <- function(...){
 cones <- read_csv("data/cones.csv")
 summary(cones)  # look at general structure of the data
 ```
+```r
+# Set the working directory
+setwd("your_filepath")
 
+# Load packages
+library(ggplot2)
+library(dplyr)
+```
 The summary() function displays a summary statistics of data for each column:
 
 -  __Plot__: Unique number assigned to each tree plot
@@ -307,14 +314,9 @@ We can see there is a general under representation of older trees which may lead
 
 **Assumption 5. There is a linear relationship between the explanatory variable and the logit of the response variable**
 
-To ensure the data relationship fits a binomial distribution there must be a linear relationship between the explanatory variable and the logit of the response variable. The logit function describes the S-shape (sigmoid curve) seen in logistic regression curves. 
+To ensure the data relationship fits a binomial distribution there must be a linear relationship between the explanatory variable and the logit of the response variable. The logit function describes the non-linearity - the S-shape (sigmoid curve) - seen in logistic regression curves, so by applying to logit function it effectively linearises the relationship for our generalised linear model. 
 
-<p align="center">
-  **Logit(p) = log(p / (1-p))** 
-</p>
-              where p is the probability of a positive outcome.
-
-We will test this relationship through a Box Tidwell test.
+We will test that the explanatory and response have this sigmoid this relationship through a Box Tidwell test.
 
 ```r
 # Test linear explanatory~logit(response) relationship
@@ -322,7 +324,10 @@ We will test this relationship through a Box Tidwell test.
 boxTidwell(Presence ~ DBH, data = conesbi)
 ```
 
-The test shows the correlation between presence and age will fit the sigmoid function of logistic regression.
+If the p-value is significant the data fits the relationship; this test shows the correlation between presence and age will fit the sigmoid function of logistic regression.
+
+ASSUMPTION MET: There is a linear relationship between the explanatory and logit of the response.
+
 
 **Assumption 6. There is a sufficiently large sample size**
 
@@ -376,7 +381,7 @@ Make sure you know your response variable, explanatory variable(s) and random ef
 |                           | - measurement year                                               | - Year          |
 
 
-#### **Check out the data**
+#### __Check out the data__
 
 If you're not in a rush you can have a look at your data distribution to get an idea of what you're working with.
 
