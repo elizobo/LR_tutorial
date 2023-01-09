@@ -7,14 +7,6 @@
   Subalpine fir forest (photo credit: <a href="https://www.flickr.com/photos/codiferous/7978232221/in/photostream/" target="_blank">C. Hinchliff</a>).
 </p>
 
-```r
-# Set the working directory
-setwd("your_filepath")
-
-# Load packages
-library(ggplot2)
-library(dplyr)
-```
 
 ### Tutorial Aims
 
@@ -139,14 +131,21 @@ summary(cones)  # look at general structure of the data
 
 The summary() function displays a summary statistics of data for each column:
 
--   **Plot**: Unique number assigned to each tree plot
--   **Tree**: Number assigned to each tree in a plot
--   **ID**: Unique number identifier for each tree
--   **Spec**: Tree species: ABLA (Subalpine fir) or PIEN (Engleman spruce)
--   **DBH**: Tree Diameter at Breast Height measurement (cm)
--   **Age**: Tree age measured at the base of the tree in 2016
--   **Year**: The year of data collection
--   **Count**: Estimate of tree seed cone abundance
+-  **Plot**: Unique number assigned to each tree plot
+
+-  **Tree**: Number assigned to each tree in a plot
+
+-  **ID**: Unique number identifier for each tree
+
+-  **Spec**: Tree species: ABLA (Subalpine fir) or PIEN (Engleman spruce)
+
+-  **DBH**: Tree Diameter at Breast Height measurement (cm)
+
+-  **Age**: Tree age measured at the base of the tree in 2016
+
+-  **Year**: The year of data collection
+
+-  **Count**: Estimate of tree seed cone abundance
 
 What effects conifer reproductive maturity? If cone presence is an indicator of reproductive maturity, what are the predictor and response variables available here to answer our question?
 
@@ -593,34 +592,34 @@ We can then report :
 You want to present your models predictions. We can create marginal effects plots to show this.
 
 ```r
-    # PLOT model predictions----
+# PLOT model predictions----
 
-    # Now we know the models are pretty good we can plot their prediction
-    predicted_dbh <- plot_model(dbh.mod, type = "pred", terms = "DBH [all]")$data # extract model predictions in response to DBH
+# Now we know the models are pretty good we can plot their prediction
+predicted_dbh <- plot_model(dbh.mod, type = "pred", terms = "DBH [all]")$data # extract model predictions in response to DBH
 
-    # Make your marginal effects plots
-    predicted_dbh_plot <- ggplot(data = predicted_dbh) + 
-      geom_line(aes(x = x, # add a line showing the model's prediction
+# Make your marginal effects plots
+predicted_dbh_plot <- ggplot(data = predicted_dbh) + 
+  geom_line(aes(x = x, # add a line showing the model's prediction
                     y = predicted),
                 colour = '#009E73',
                 linewidth = 1) + 
-      geom_ribbon(aes(x = x, # add a line to show 95% confidence intervals
+  geom_ribbon(aes(x = x, # add a line to show 95% confidence intervals
                       ymin = conf.low,
                       ymax = conf.high), 
                   fill = "#009E73",
                   alpha = 0.3) + 
-      labs(x = 'Tree DBH (cm)', # personalise labels
+  labs(x = 'Tree DBH (cm)', # personalise labels
            y = 'Probability of cone presence',
            caption = '\n Figure 1: Probability of cone presence predicted from tree size for conifers in the \n southern Rocky Mountains, USA. ') + 
-      plots_theme() +
-      theme(plot.caption = element_text(size = 50, # for come reason this caption stuff just won't come through from the function we made so you have to reiterate it here
+   plots_theme() +
+   theme(plot.caption = element_text(size = 50, # for come reason this caption stuff just won't come through from the function we made so you have to reiterate it here
                                         hjust = 0))
 
-    # Save your plot
-    ggsave(filename = 'images/p_cone_dbh.png',
-           width = 30,
-           height = 15, 
-           units = 'in')
+# Save your plot
+ggsave(filename = 'images/p_cone_dbh.png',
+       width = 30,
+       height = 15, 
+       units = 'in')
 ```
 <p align="center">
    <img src="{{ site.baseurl }}/images/p_cone_dbh.png" alt="drawing" width="70%">
