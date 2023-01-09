@@ -63,7 +63,7 @@ Our dataset is a mixture of cone abundance from Subalpine fir, *Abies lasiocarpa
 
 First we'll set up the RStudio working environment and load in this data.
 
-``` r
+```r
 ## Set up----
 
 # Set the working directory
@@ -150,7 +150,7 @@ Before making a logistic regression model you have to check your data is suited 
 
 Each data point used to construct the model must be equally related. To check this we will print the first and last 6 rows of the data and check any metadata we have available.
 
-``` r
+```r
 # Look at data structure
 
 head(cones)  # print first 6 rows of data
@@ -171,7 +171,7 @@ ASSUMPTION MET: If we take these variables into account as random effects, we ca
 
 Currently we only have *cone abundance* data. We will make a new response variable column, *cone presence*. Presence will be indicated by 1 and absence by 0.
 
-``` r
+```r
 # Make abundance into P/A data
 
 conesbi <- cones %>% 
@@ -189,7 +189,7 @@ Predictor variables included in the model as fixed effects must be independent. 
 
 We will test to see if there is any correlation between them by making a correlation plot. The larger and darker the circle, the stronger the correlation between the variables. Blue colouring indicated a positive correlation and red indicated a negative correlation.
 
-``` r
+```r
 # Test continuous predictor variable autocorrelation
 
 cov(conesbi$Age, conesbi$DBH) # print covariation value (indicates direction not strength)
@@ -214,7 +214,7 @@ Data points that are extreme outliers have a disproportionate effect on the data
 
 We will get an idea of any potential outliers by seeing if we have a good representation of data along the range of our explanatory variable. We will get an idea of any outliers by creating a boxplot of our response variable. R will highlight any datapoints outside 1.5 times the interquartile range as circles.
 
-``` r
+```r
 # Check outliers of the explanatory variable
 
 boxplot(conesbi$DBH, main = "Boxplot")
@@ -240,7 +240,7 @@ To ensure the data relationship fits a binomial distribution there must be a lin
 
 We will test this relationship through a Box Tidwell test.
 
-``` r
+```r
 # Test linear explanatory~logit(response) relationship
 
 boxTidwell(Presence ~ DBH, data = conesbi)
@@ -254,7 +254,7 @@ The model must contain a minimum of 10 observations of the least frequent outcom
 
 We will find the least frequent outcome and work out how many explanatory variables we are allowed for this model.
 
-``` r
+```r
 # Checking data quantity for explanatory variables
 
 obs <- length(conesbi$Presence) # find number of observstions
@@ -306,7 +306,7 @@ If you're not in a rush you can have a look at your data distribution to get an 
 
 Create a boxplot to see the trend in binomial data against your continuous predictor(s). You can add more predictor variables into the code below if you want to compare their relative distribution.
 
-``` r
+```r
 # Boxplot to compare distributions of binomial distribution with continuous predictor
 
 data_dist <- melt(conesbi[, c("Presence", "DBH")], # you can add in all your possible continuous predictor variables to have a look at the data distribution with it
@@ -337,7 +337,7 @@ This plot shows there are more cases of cone presence for larger trees but there
 
 We'll see how the binary is distributed between a categorical explanatory variable as well.
 
-``` r
+```r
 # Binomial distribution with categorical on continuous predictor
 
 ggplot(conesbi, aes(x = DBH, y = Presence, colour = Spec)) + 
@@ -370,7 +370,7 @@ The Engleman spruce appears to have more observations of cone presence than Suba
 
 First we'll make a null model. This plots the response against a constant to see the strength of model predictions from chance alone.
 
-``` r
+```r
 # Null - make a null model to compare the others to
 
 null.mod <- glm(Presence ~ 1,  # there are no explanatory variables
@@ -385,7 +385,7 @@ Now we'll make up our more complex models including the explanatory variables an
 
 We'll try including our explanatory variables as separate fixed effects and interacting fixed effects. Whilst the separate (+) fixed effects allow the effect of tree species and DBH on cone presence to be taken into account separately, the interaction term (\*) allows DBH to have a different effect on cone presence depending on the conifer species in question.
 
-``` r
+```r
 # How does the likelihood of conifer cone presence change with tree age and species?
 
 # Make a model with fixed and random effects 
@@ -403,7 +403,7 @@ dbh.mod.int <- glmer(Presence ~ DBH * Spec + (1 | Plot / ID) + (1 | Year),
 
 And finally, compare the models you've made. We'll extract the corrected Archaic Information Criterion value, AICc, from each model. This number indicates the model prediction error, so the lower the value the better the model. AICc puts a greater penalty on the number of parameters used in a model than AIC and is particularly good for smaller datasets. However, even with larger datasets like this the AICc value ends up converging with AIC so its generally best just to use AICc. You can only compare AICc values on models using the same dataset and predicting the same response variable.
 
-``` r
+```r
 # Compare ur models with AICc galfriend!
 AICc(null.mod, dbh.mod, dbh.mod.int)
 ## species can't be included as a random effect because only 2 levels but seems like its better included as a fixed effect than not at all
@@ -428,7 +428,7 @@ We check for outliers using a Cook's distance plot. The Cook's distance of a dat
 
 We'll create a simple general linear model (without the random effects so not a mixed GLM as Cook's distance can't take these into account). It is disputed about how far is too far with Cook's distance but generally 4/n (n being number of observations) or 0.05 is used. The function below should generate a plot in a new window that handily labels points that are possible outliers.
 
-``` r
+```r
 # Check outliers with Cook's distance plot
 model <- glm(Presence ~ DBH + Spec, family = "binomial", data = conesbi)
 CookD(model) # this might pop up in another window
@@ -448,7 +448,7 @@ By splitting up the dataset we can use some of the data to make the model and th
 
 Split up the data and rebuild our model using only the training dataset.
 
-``` r
+```r
 # Test and train then model
 
 # Make random sample reproducible (so you can come back to this and get the same set of numbers in the training and testing dataset)
@@ -467,14 +467,14 @@ train.mod <- glmer(Presence ~ DBH + Spec + (1 | Plot) + (1 | Year), # ID can't b
 
 Extract predictions made by the model for explanatory variable values from the test dataset.
 
-``` r
+```r
 # Use your training model to make predictions for the test data
 pdata <- predict(train_mod, newdata = test, type = "response")
 ```
 
 Find the optimum cutoff probability of the model - the point on the explanatory variable at which it is more likely the binary response will be 1 than 0.
 
-``` r
+```r
 # Compute a confusion matrix comparing the predicted model outcomes to the real outcomes for the test dataset
 confusionMatrix(data = as.factor(as.numeric(pdata>0.5)), reference = as.factor(test$Presence))  # the extracted predictions are probabilities and must be set as numerical 1/0 factors to match the original test data
 ```
@@ -489,7 +489,7 @@ This shows the number of unmatching outcomes are low, showing the model is prett
 
 -   misclassification error rate : the proportion of observations (both positive and negative) that were not predicted correctly by the model
 
-``` r
+```r
 # Calculate total misclassification error rate
 optimal <- optimalCutoff(test$Presence, p_data())[1]  # find optimal cutoff probability for when 0 is predicted to 1 to use to maximize accuracy
 misClassError(test$Presence, predicted, threshold=optimal)  # print misclas error rate
@@ -499,7 +499,7 @@ This prints the misclassification error rate as 23% which is good to bear in min
 
 You can also use your model to make predictions given specific explanatory values. For example, to find the predictive probability of an Engleman spruce in Plot 1 with a DBH of 10cm having cone presence in 2018 you could do the following:
 
-``` r
+```r
 # Make predictions
 new <- data.frame(DBH = 10, Spec  = "ABLA", Plot = "1", Year = "2018")  # create a new data frame defining predictor variables
 predict(train.mod, new, type="response")  # print model predicted probability of it producing cones
@@ -518,7 +518,7 @@ This prints 0.1113638, meaning a tree with these attributes would have 11% likel
 
 Now we know our model is pretty good we can draw any results from it. First we'll look at the model summary.
 
-``` r
+```r
 # Look at the model outcomes
 summary(dbh.mod)
 ```
@@ -545,7 +545,7 @@ Everything is annotated here but all you'll probably use is the numbers in the s
 
 You can print a table with these statistics using the code below and simply refer to it in your results statements if your short on word space. It can also be worth including an odds ratio diagram as the reader can quickly grasp if and how the fixed effects can predict the response.
 
-``` r
+```r
 # Print a table for reporting values
 tab_model(dbh.mod)
 # Make fixed effects plots showing the odds ratio
@@ -580,7 +580,7 @@ We can then report :
 
 You want to present your models predictions. We can create marginal effects plots to show this.
 
-``` r
+```r
     # PLOT model predictions----
 
     # Now we know the models are pretty good we can plot their prediction
@@ -619,7 +619,7 @@ You want to present your models predictions. We can create marginal effects plot
 
 If your categorical predictor is significant you might want to show marginal effects for each separate category.
 
-``` r
+```r
 # Make a plot with separate predictions for each categorical variable
 
 # Extract predictions again
