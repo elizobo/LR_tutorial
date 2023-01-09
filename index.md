@@ -46,7 +46,7 @@ Our dataset is a mixture of cone abundance from Subalpine fir, *Abies lasiocarpa
 
 <p align="center">
 
-  |<img src="https://github.com/elizobo/LR_tutorial/blob/master-branch/images/engelman_cone2.jpeg" alt="drawing" width="70%" > | <img src="https://github.com/elizobo/LR_tutorial/blob/master-branch/images/subalpfir_cone.jpeg" alt="drawing" width="100%" >|
+  |<img src="{{ site.baseurl }}/images/engelman_cone2.jpeg" alt="drawing" width="70%" > | <img src="{{ site.baseurl }}/images/subalpfir_cone.jpeg" alt="drawing" width="100%" >|
   |:---:|:---:|
   |Engleman spruce seed cones (photo credit: <a href="https://https://www.conifers.org/pi/Picea_engelmannii.php" target="_blank"> C. Earle </a>) |Subalpine fir seed cones (photo credit: <a href="https://www.flickr.com/photos/76416226@N03/6881892262" target="_blank"> B. Leystra </a>)|
 
@@ -193,7 +193,7 @@ correlations # print correlation value (closer to 1 or -1 indicates strong +ve o
 corrplot(correlations, method="circle") # create circle plot showing correlation
 ```
 <p align="center">
-   <img src="https://github.com/elizobo/LR_tutorial/blob/master-branch/images/corrplot.png" alt="drawing" width="50%">
+   <img src="{{ site.baseurl }}/images/corrplot.png" alt="drawing" width="50%">
 </p>
 <p align="center">
   Correlation plot for the models potential explanatory variables.
@@ -216,7 +216,7 @@ boxplot(conesbi$DBH, main = "Boxplot")
 ```
 
 <p align="center">
-   <img src="https://github.com/elizobo/LR_tutorial/blob/master-branch/images/outlier_box.png" alt="drawing" width="50%">
+   <img src="{{ site.baseurl }}/images/outlier_box.png" alt="drawing" width="50%">
 </p>
 <p align="center">
   Distribution of explanatory Diamater at Breast Height data with outliers highlighted as circles.
@@ -322,7 +322,7 @@ ggplot(data_dist, aes(factor(Presence), y = value, fill=factor(Presence))) +
 
 
 <p align="center">
-   <img src="https://github.com/elizobo/LR_tutorial/blob/master-branch/images/distrib1.png" alt="drawing" width="50%">
+   <img src="{{ site.baseurl }}/images/distrib1.png" alt="drawing" width="50%">
 </p>
 <p align="center">
   Distribution plot for the continuous explanatory variable.
@@ -348,7 +348,7 @@ ggplot(conesbi, aes(x = DBH, y = Presence, colour = Spec)) +
 ```
 
 <p align="center">
-   <img src="https://github.com/elizobo/LR_tutorial/blob/master-branch/images/distrib2.png" alt="drawing" width="50%">
+   <img src="{{ site.baseurl }}/images/distrib2.png" alt="drawing" width="50%">
 </p>
 <p align="center">
   Distribution plot for continuous and categorical explanatory variables.
@@ -429,7 +429,7 @@ model <- glm(Presence ~ DBH + Spec, family = "binomial", data = conesbi)
 CookD(model) # this might pop up in another window
 ```
 <p align="center">
-   <img src="https://github.com/elizobo/LR_tutorial/blob/master-branch/images/cooks_d.png" alt="drawing" width="50%">
+   <img src="{{ site.baseurl }}/images/cooks_d.png" alt="drawing" width="50%">
 </p>
 <p align="center">
   Cooks distance plot with outliers labeled with reference numbers.
@@ -474,7 +474,7 @@ Find the optimum cutoff probability of the model - the point on the explanatory 
 confusionMatrix(data = as.factor(as.numeric(pdata>0.5)), reference = as.factor(test$Presence))  # the extracted predictions are probabilities and must be set as numerical 1/0 factors to match the original test data
 ```
 <p align="center">
-   <img src="https://github.com/elizobo/LR_tutorial/blob/master-branch/images/conf_matrix.png" alt="drawing" width="100%">
+   <img src="{{ site.baseurl }}/images/conf_matrix.png" alt="drawing" width="100%">
 </p>
 <p align="center">
   Annotated confusion matrix report in Rstudio.
@@ -518,7 +518,7 @@ Now we know our model is pretty good we can draw any results from it. First we'l
 summary(dbh.mod)
 ```
 <p align="center">
-   <img src="https://github.com/elizobo/LR_tutorial/blob/master-branch/images/mod_summary.png" alt="drawing" width="100%">
+   <img src="{{ site.baseurl }}/images/mod_summary.png" alt="drawing" width="100%">
 </p>
 <p align="center">
   Annotated model summary report.
@@ -550,14 +550,14 @@ plot_model(dbh.mod,
 ```
 
 <p align="center">
-   <img src="https://github.com/elizobo/LR_tutorial/blob/master-branch/images/CI_sumtab.png" alt="drawing" width="70%">
+   <img src="{{ site.baseurl }}/images/CI_sumtab.png" alt="drawing" width="70%">
 </p>
 <p align="center">
   Summary reporting statistics (tab_model output).
 </p>
 
 <p align="center">
-   <img src="https://github.com/elizobo/LR_tutorial/blob/master-branch/images/odds_plot.png" alt="drawing" width="70%">
+   <img src="{{ site.baseurl }}/images/odds_plot.png" alt="drawing" width="70%">
 </p>
 <p align="center">
   Odds ratio plot for final model fixed effects, DBH (tree diameter at breast height) and Spec (tree species, Engleman spruce in comparison to Subalpine fir). The odds ratio is represented by the red circle and 95% confidence interval by the horizontal red line. The odds ratio value is labeled on the plot and significance represented by asterisks.
@@ -606,7 +606,7 @@ You want to present your models predictions. We can create marginal effects plot
            units = 'in')
 ```
 <p align="center">
-   <img src="https://github.com/elizobo/LR_tutorial/blob/master-branch/images/p_cone_dbh.png" alt="drawing" width="70%">
+   <img src="{{ site.baseurl }}/images/p_cone_dbh.png" alt="drawing" width="70%">
 </p>
 <p align="center">
   Presenting a prediction distribution plot with 95% confidence intervals.
@@ -655,7 +655,7 @@ ggsave(filename = 'images/p_cone_dbh_sp.png',
 ```
 
 <p align="center">
-   <img src="https://github.com/elizobo/LR_tutorial/blob/master-branch/images/p_cone_dbh_sp.png" alt="drawing" width="70%">
+   <img src="{{ site.baseurl }}/images/p_cone_dbh_sp.png" alt="drawing" width="70%">
 </p>
 <p align="center">
   Presenting a prediction distribution plot with 95% confidence intervals.
@@ -671,7 +671,7 @@ ggsave(filename = 'images/p_cone_dbh_sp.png',
 This is the end of the tutorial. taadaa now you can have a walk outside, cup of tea and an unholy number of oreos then go get started on that report. Good job.
 
 <p align="center">
-   <img src="https://github.com/elizobo/LR_tutorial/blob/master-branch/images/Spruce-habitat.jpeg" alt="drawing" width="75%">
+   <img src="{{ site.baseurl }}/images/Spruce-habitat.jpeg" alt="drawing" width="75%">
 </p>
 <p align="center">
   Engleman spruce forest (photo credit: <a href="http://nativeplantspnw.com/about-me/" target="_blank">D. Bressette</a>)
