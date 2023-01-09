@@ -22,17 +22,17 @@
 
 We often have work with binary data in ecology. Whether measuring germination success, the presence of a species in a quadrat, or an animal's behavior choice, we are left with a binary response variable. To see how this binary is effected by a continuous variable, often an environmental gradient, we can carry out logistic regression.
 
-**All the B-word Terminology**
+__All the B-word Terminology__
 
--   **Binary :** Your data is binary if it has 2 outcomes. For example, left or right, pink or white, success or failure, presence or absence, yes or no. You can always represent these outcomes as '0' and '1'.
+-   __Binary :__ Your data is binary if it has 2 outcomes. For example, left or right, pink or white, success or failure, presence or absence, yes or no. You can always represent these outcomes as '0' and '1'.
 
--   **Boolean** : Your data is Boolean if you have combination outcomes you can define as binary data with values of true and false. You pretty much only have to think of data in this way if you're doing Boolean Algebra - building a deductive logical system (not part of this tutorial, phew).
+-   __Boolea__ : Your data is Boolean if you have combination outcomes you can define as binary data with values of true and false. You pretty much only have to think of data in this way if you're doing Boolean Algebra - building a deductive logical system (not part of this tutorial, phew).
 
--   **Bernoulli** : A Bernoulli trial/experiment is a single binary experiment. The outcome of this has Bernoulli distribution - the observed response of '0' or '1'.
+-   __Bernoulli__ : A Bernoulli trial/experiment is a single binary experiment. The outcome of this has Bernoulli distribution - the observed response of '0' or '1'.
 
--   **Binomial** : A binomial distribution describes the outcome of several Bernoulli trials - the probability that in X number of trials there will be Y number of '1' outcomes.
+-   __Binomial__ : A binomial distribution describes the outcome of several Bernoulli trials - the probability that in X number of trials there will be Y number of '1' outcomes.
 
--   **Beta** : A beta distribution also describes the outcome of several Bernoulli trials but as a probability of having '1' as an outcome, given the number of '1' and '0' outcomes from X number of trials. As the number of Bernoulli trials increases the beta distribution will change from a straight line to an increasingly arched bell shape.
+-   __Beta__ : A beta distribution also describes the outcome of several Bernoulli trials but as a probability of having '1' as an outcome, given the number of '1' and '0' outcomes from X number of trials. As the number of Bernoulli trials increases the beta distribution will change from a straight line to an increasingly arched bell shape.
 
 By classifying the binary variable outcomes as 0 and 1, logistic regression can use *maximum likelihood estimation* to calculate the probability that a given observation will take on a value of 1. Binomial logistic regression is a binomial regression but with a logit link function to make the relationship between the predictor and response variables linear. If you want to go into more of the maths have a read \<a href="<https://medium.com/deep-math-machine-learning-ai/chapter-2-0-logistic-regression-with-math-e9cbb3ec6077>["](https://portal.edirepository.org/nis/home.jsp%22) target="\_blank"\> here</a>, otherwise this tutorial can give you all you need to get your report underway from raw data to results.
 
@@ -131,23 +131,83 @@ cones <- read_csv("data/cones.csv")
 summary(cones)  # look at general structure of the data
 ```
 
+
+```r
+## Set up----
+
+# Set the working directory
+
+setwd("your_filepath")
+
+
+# Load your libraries
+
+library(dplyr)
+library(corrplot)
+library(MuMIn)
+library(predictmeans)
+library(InformationValue)
+library(caret)
+library(InformationValue)
+
+
+# Set a plot theme function
+
+plot_theme <- function(...){
+  theme_classic() +
+    theme(                                
+      axis.text = element_text(size = 7,                           # adjust axes
+                               colour = "black"),
+      axis.text.x = element_text(margin = margin(5, b = 10)),
+      axis.title = element_text(size = 6,
+                                colour = 'black'),
+      axis.ticks = element_blank(),
+      plot.background = element_rect(fill = "white",               # adjust background colors
+                                     colour = NA),
+      panel.background = element_rect(fill = "white",
+                                      colour = NA),
+      legend.background = element_rect(fill = NA,
+                                       colour = NA),
+      legend.title = element_text(size = 10),                      # adjust titles
+      legend.text = element_text(size = 16, hjust = 0,
+                                 colour = "black"),
+      plot.title = element_text(size = 17,
+                                colour = 'black',
+                                margin = margin(10, 10, 10, 10),
+                                hjust = 0.5),
+      plot.subtitle = element_text(size = 10, hjust = 0.5,
+                                   colour = "black",
+                                   margin = margin(0, 0, 30, 0)),
+      plot.caption = element_text(plot.caption = element_text(size = 50,
+                                                              hjust=0))
+      )
+}
+
+
+
+# Load data
+
+cones <- read_csv("data/cones.csv")
+summary(cones)  # look at general structure of the data
+```
+
 The summary() function displays a summary statistics of data for each column:
 
--  **Plot**: Unique number assigned to each tree plot
+-  __Plot__: Unique number assigned to each tree plot
 
--  **Tree**: Number assigned to each tree in a plot
+-  __Tree__: Number assigned to each tree in a plot
 
--  **ID**: Unique number identifier for each tree
+-  __ID__: Unique number identifier for each tree
 
--  **Spec**: Tree species: ABLA (Subalpine fir) or PIEN (Engleman spruce)
+-  __Spec__: Tree species: ABLA (Subalpine fir) or PIEN (Engleman spruce)
 
 -  **DBH**: Tree Diameter at Breast Height measurement (cm)
 
--  **Age**: Tree age measured at the base of the tree in 2016
+-  __Age__: Tree age measured at the base of the tree in 2016
 
--  **Year**: The year of data collection
+-  __Year__: The year of data collection
 
--  **Count**: Estimate of tree seed cone abundance
+-  __Count__: Estimate of tree seed cone abundance
 
 What effects conifer reproductive maturity? If cone presence is an indicator of reproductive maturity, what are the predictor and response variables available here to answer our question?
 
@@ -162,7 +222,7 @@ What effects conifer reproductive maturity? If cone presence is an indicator of 
 
 Before making a logistic regression model you have to check your data is suited for it. There are 6 assumptions we'll work through.
 
-**Assumption 1. Observations are independent**
+__Assumption 1. Observations are independent__
 
 Each data point used to construct the model must be equally related. To check this we will print the first and last 6 rows of the data and check any metadata we have available.
 
@@ -183,7 +243,7 @@ To account for these links and avoid pseudo replication we will have to account 
 
 ASSUMPTION MET: If we take these variables into account as random effects, we can assume datapoints are independent.
 
-**Assumption 2. The response variable is binomial**
+__Assumption 2. The response variable is binomial__
 
 Currently we only have *cone abundance* data. We will make a new response variable column, *cone presence*. Presence will be indicated by 1 and absence by 0.
 
@@ -199,7 +259,7 @@ conesbi <- cones %>%
 
 ASSUMPTION MET: We have a binomial response variable.
 
-**Assumption 3. Predictor variables are independent with no multicolinearity**
+__Assumption 3. Predictor variables are independent with no multicolinearity__
 
 Predictor variables included in the model as fixed effects must be independent. Non of the predictor variables can be related to any of the others otherwise they will explain the same variation in the response variable, and the model will appear more powerful than it actually is.
 
@@ -224,7 +284,7 @@ There is a very strong positive relationship between tree age and DBH. Including
 
 ASSUMPTION MET: We will use DBH as the only fixed effect in this model so that it is an independent explanatory variable.
 
-**Assumption 4. There are no extreme outliers in the explanatory variable.**
+__Assumption 4. There are no extreme outliers in the explanatory variable.__
 
 Data points that are extreme outliers have a disproportionate effect on the data trend and may affect the prediction probability of the datapoints by the model. Although the sigmoid function in logistic regression models tapers outliers so they aren't as influential as they would be in other model types, extreme outliers may still lower the model performance so should be identified and removed ONLY IF there is any valid reason for exclusion (e.g. it turned out the tree was actually dead).
 
