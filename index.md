@@ -534,9 +534,7 @@ Everything is annotated here but all you'll probably use is the numbers in the s
 -   **Odds Ratio (OR) :** A measure of the odds of an event happening in one group compared to the odds of the same event happening in another group. Odds of an event is the likelihood that it occurs as a proportion of the likelihood it will not occur. For categorical variables each category is one group. For continuous variables one group represents a 1 unit increase in the variable from the other group.
 
     -   OR \> 1 : The event is more likely to occur
-
     -   OR \< 1 : The event is less likely to occur
-
     -   OR = 1 : The likelihood of the event stays the same
 
 -   **Confidence Intervals (CI)** : Shows the error associated with the odds ratios estimates. If these extend so far as to cross 1 then the OR is not significant as there is a chance that the OR could be 1 meaning the variable has no impact on the likelihood of the event occuring.
@@ -571,7 +569,6 @@ plot_model(dbh.mod,
 We can then report :
 
 -   A 1cm increase in tree DBH increases likelihood of cone presence by 16% (95% CI [.13, .19]; Figure 1). We can conclude tree size is a strong predictor of reproductive maturity.
-
 -   Engleman spruce are 157% more likely to have seed cone presence than Subalpine fir (95% CI [.72, 2.84]; Figure 2).
 
 <pre>
