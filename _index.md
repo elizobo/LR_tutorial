@@ -1,4 +1,63 @@
 
+```r
+## Set up----
+
+# Set the working directory
+
+setwd("your_filepath")
+
+
+# Load your libraries
+
+library(dplyr)
+library(corrplot)
+library(MuMIn)
+library(predictmeans)
+library(InformationValue)
+library(caret)
+library(InformationValue)
+
+
+# Set a plot theme function
+
+plot_theme <- function(...){
+  theme_classic() +
+    theme(                                
+      axis.text = element_text(size = 7,                           # adjust axes
+                               colour = "black"),
+      axis.text.x = element_text(margin = margin(5, b = 10)),
+      axis.title = element_text(size = 6,
+                                colour = 'black'),
+      axis.ticks = element_blank(),
+      plot.background = element_rect(fill = "white",               # adjust background colors
+                                     colour = NA),
+      panel.background = element_rect(fill = "white",
+                                      colour = NA),
+      legend.background = element_rect(fill = NA,
+                                       colour = NA),
+      legend.title = element_text(size = 10),                      # adjust titles
+      legend.text = element_text(size = 16, hjust = 0,
+                                 colour = "black"),
+      plot.title = element_text(size = 17,
+                                colour = 'black',
+                                margin = margin(10, 10, 10, 10),
+                                hjust = 0.5),
+      plot.subtitle = element_text(size = 10, hjust = 0.5,
+                                   colour = "black",
+                                   margin = margin(0, 0, 30, 0)),
+      plot.caption = element_text(plot.caption = element_text(size = 50,
+                                                              hjust=0))
+      )
+}
+
+
+
+# Load data
+
+cones <- read_csv("data/cones.csv")
+summary(cones)  # look at general structure of the data
+```
+
 
 # Yoyo Binomial Logistic Regression Tutorial
 
