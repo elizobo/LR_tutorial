@@ -371,14 +371,14 @@ Before building your model, remind yourself of your research question :
 
 Make sure you know your response variable, explanatory variable(s) and random effects and their names within the model.
 
-| **Model parameter type**  | Our model parameter                                              | Name in Rscript |
-|---------------------------|------------------------------------------------------------------|-----------------|
-| **Response variable**     | - conifer reproductive maturity, indicated by seed cone presence | - Presence      |
-| **Explanatory variables** | - tree size                                                      | - Age           |
-|                           | - conifer tree species                                           | - Spec          |
-| **Random effects**        | - individual tree                                                | - ID            |
-|                           | - plot of trees                                                  | - Plot          |
-|                           | - measurement year                                               | - Year          |
+| __Model parameter type__  | __Our model parameter__                                          | __Name in Rscript__ |
+|---------------------------|------------------------------------------------------------------|---------------------|
+| __Response variable__     | - conifer reproductive maturity, indicated by seed cone presence | - Presence          |
+| __Explanatory variables__ | - tree size                                                      | - Age               |
+|                           | - conifer tree species                                           | - Spec              |
+| __Random effects__        | - individual tree                                                | - ID                |
+|                           | - plot of trees                                                  | - Plot              |
+|                           | - measurement year                                               | - Year              |
 
 
 #### __Check out the data__
@@ -447,7 +447,7 @@ The Engleman spruce appears to have more observations of cone presence than Suba
 
 </pre>
 
-#### **Modelling**
+#### __Modelling__
 
 First we'll make a null model. This plots the response against a constant to see the strength of model predictions from chance alone.
 
@@ -760,6 +760,7 @@ This is the end of the tutorial. taadaa now you can have a walk outside, cup of 
   Engleman spruce forest (photo credit: <a href="http://nativeplantspnw.com/about-me/" target="_blank">D. Bressette</a>)
 </p>
 
+
 In this tutorial you learned how to:
 
 ##### - check your data is appropriate for logistic regression
@@ -775,6 +776,7 @@ In this tutorial you learned how to:
 ##### - report and present the results and predictions of your model
 
 Not sure if you understood anything you just read? Check yourself by doing the..
+
 
 ## CHALLENGE
 
