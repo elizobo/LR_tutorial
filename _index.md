@@ -103,25 +103,6 @@ For this tutorial we'll be looking into reproductive maturity of conifers. There
 Our dataset is a mixture of cone abundance from Subalpine fir, *Abies lasiocarpa*, and Engleman spruce, *Picea engelmannii* from southern Rocky Mountains, USA. The data is from this <a href="https://portal.edirepository.org/nis/home.jsp" target="_blank"> neat open source database site </a>.
 
 
-<p align="center">
-   <p align="center">
-   <img src="{{ site.baseurl }}/images/engelman_cone2.png" alt="drawing" width="70%" > 
-</p>
-<p align="center">
-   <p align="center">
-   Engleman spruce seed cones (photo credit: <a href="https://https://www.conifers.org/pi/Picea_engelmannii.php" target="_blank"> C. Earle </a>).
-</p>
-      
-<p align="center">
-   <p align="center">
-   <img src="{{ site.baseurl }}/images/subalpfir_cone.png" alt="drawing" width="100%" >
-</p>
-<p align="center">
-   <p align="center">
-    Subalpine fir seed cones (photo credit: <a href="https://www.flickr.com/photos/76416226@N03/6881892262" target="_blank"> B. Leystra </a>). 
-</p>
-
-
 
 First we'll set up the RStudio working environment and load in this data.
 ```r
@@ -761,6 +742,24 @@ In this tutorial you learned how to:
 ##### - report and present the results and predictions of your model
 
 Not sure if you understood anything you just read? Check yourself by doing the..
+
+<p align="center">
+   <p align="center">
+   <img src="{{ site.baseurl }}/images/engelman_cone2.png" alt="drawing" width="70%" > 
+</p>
+<p align="center">
+   <p align="center">
+   Engleman spruce seed cones (photo credit: <a href="https://https://www.conifers.org/pi/Picea_engelmannii.php" target="_blank"> C. Earle </a>).
+</p>
+      
+<p align="center">
+   <p align="center">
+   <img src="{{ site.baseurl }}/images/subalpfir_cone.png" alt="drawing" width="100%" >
+</p>
+<p align="center">
+   <p align="center">
+    Subalpine fir seed cones (photo credit: <a href="https://www.flickr.com/photos/76416226@N03/6881892262" target="_blank"> B. Leystra </a>). 
+</p>
 
 
 ## CHALLENGE
