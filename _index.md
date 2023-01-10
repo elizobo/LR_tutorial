@@ -1,4 +1,8 @@
 
+
+
+# Binomial Logistic Regression Tutorial
+
 ```r
 ## Set up----
 
@@ -57,9 +61,6 @@ plot_theme <- function(...){
 cones <- read_csv("data/cones.csv")
 summary(cones)  # look at general structure of the data
 ```
-
-
-# Yoyo Binomial Logistic Regression Tutorial
 
 <p align="center">
    <img src="{{ site.baseurl }}/images/subalp_forest.png" alt="drawing" width="75%">
