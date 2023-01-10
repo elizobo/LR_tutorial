@@ -1,47 +1,130 @@
-<center><img src="{{ site.baseurl }}/tutheaderbl.png" alt="Img"></center>
 
-To add images, replace `tutheaderbl1.png` with the file name of any image you upload to your GitHub repository.
+
+# Binomial Logistic Regression Tutorial
+
+<p align="center">
+   <img src="{{ site.baseurl }}/images/subalp_forest.png" alt="drawing" width="75%">
+</p>
+<p align="center">
+  Subalpine fir forest (photo credit: <a href="https://www.flickr.com/photos/codiferous/7978232221/in/photostream/" target="_blank">C. Hinchliff</a>).
+</p>
+
 
 ### Tutorial Aims
 
-#### <a href="#section1"> 1. The first section</a>
+#### <a href="#section1"> 1. Check assumptions of binomial logistic regression</a>
 
-#### <a href="#section2"> 2. The second section</a>
+#### <a href="#section2"> 2. Build a binomial logistic regression model</a>
 
-#### <a href="#section3"> 3. The third section</a>
+#### <a href="#section3"> 3. Test a binomial logistic regression model</a>
 
-You can read this text, then delete it and replace it with your text about your tutorial: what are the aims, what code do you need to achieve them?
----------------------------
-We are using `<a href="#section_number">text</a>` to create anchors within our text. For example, when you click on section one, the page will automatically go to where you have put `<a name="section_number"></a>`.
+#### <a href="#section4"> 4. Present and report the results of a binomial logistic regression model</a>
 
-To create subheadings, you can use `#`, e.g. `# Subheading 1` creates a subheading with a large font size. The more hashtags you add, the smaller the text becomes. If you want to make text bold, you can surround it with `__text__`, which creates __text__. For italics, use only one understore around the text, e.g. `_text_`, _text_.
+## Basics for working with the binomial
 
-# Subheading 1
-## Subheading 2
-### Subheading 3
+We often have work with binary data in ecology. Whether measuring germination success, the presence of a species in a quadrat, or an animal's behavior choice, we are left with a binary response variable. To see how this binary is effected by a continuous variable, often an environmental gradient, we can carry out logistic regression.
 
-This is some introductory text for your tutorial. Explain the skills that will be learned and why they are important. Set the tutorial in context.
+__All the B-word Terminology__
 
-You can get all of the resources for this tutorial from <a href="https://github.com/ourcodingclub/CC-EAB-tut-ideas" target="_blank">this GitHub repository</a>. Clone and download the repo as a zip file, then unzip it.
+-   __Binary :__ Your data is binary if it has 2 outcomes. For example, left or right, pink or white, success or failure, presence or absence, yes or no. You can always represent these outcomes as '0' and '1'.
 
-<a name="section1"></a>
+-   __Boolea__ : Your data is Boolean if you have combination outcomes you can define as binary data with values of true and false. You pretty much only have to think of data in this way if you're doing Boolean Algebra - building a deductive logical system (not part of this tutorial, phew).
 
-## 1. The first section
+-   __Bernoulli__ : A Bernoulli trial/experiment is a single binary experiment. The outcome of this has Bernoulli distribution - the observed response of '0' or '1'.
+
+-   __Binomial__ : A binomial distribution describes the outcome of several Bernoulli trials - the probability that in X number of trials there will be Y number of '1' outcomes.
+
+-   __Beta__ : A beta distribution also describes the outcome of several Bernoulli trials but as a probability of having '1' as an outcome, given the number of '1' and '0' outcomes from X number of trials. As the number of Bernoulli trials increases the beta distribution will change from a straight line to an increasingly arched bell shape.
+
+By classifying the binary variable outcomes as 0 and 1, logistic regression can use *maximum likelihood estimation* to calculate the probability that a given observation will take on a value of 1. Binomial logistic regression is a binomial regression but with a logit link function to make the relationship between the predictor and response variables linear. If you want to go into more of the maths have a read \<a href="<https://medium.com/deep-math-machine-learning-ai/chapter-2-0-logistic-regression-with-math-e9cbb3ec6077>["](https://portal.edirepository.org/nis/home.jsp%22) target="\_blank"\> here</a>, otherwise this tutorial can give you all you need to get your report underway from raw data to results.
+
+You can get all of the resources for this tutorial from <a href="https://github.com/elizobo/LR_tutorial" target="_blank">this GitHub repository</a>. Clone and download the repo as a zip file, then unzip it.
+
+### Data: Conifer cones
+
+For this tutorial we'll be looking into reproductive maturity of conifers. There is high variability in seed cone production among many northern temperate conifers, and we'll make a model to find reasons for this variation.
+
+Our dataset is a mixture of cone abundance from Subalpine fir, *Abies lasiocarpa*, and Engleman spruce, *Picea engelmannii* from southern Rocky Mountains, USA. The data is from this <a href="https://portal.edirepository.org/nis/home.jsp" target="_blank"> neat open source database site </a>.
 
 
-At the beginning of your tutorial you can ask people to open `RStudio`, create a new script by clicking on `File/ New File/ R Script` set the working directory and load some packages, for example `ggplot2` and `dplyr`. You can surround package names, functions, actions ("File/ New...") and small chunks of code with backticks, which defines them as inline code blocks and makes them stand out among the text, e.g. `ggplot2`.
+<p align="center">
+   <p align="center">
+   <img src="{{ site.baseurl }}/images/engelman_cone2.png" alt="drawing" width="70%" > 
+</p>
+<p align="center">
+   <p align="center">
+   Engleman spruce seed cones (photo credit: <a href="https://https://www.conifers.org/pi/Picea_engelmannii.php" target="_blank"> C. Earle </a>).
+</p>
+      
+<p align="center">
+   <p align="center">
+   <img src="{{ site.baseurl }}/images/subalpfir_cone.png" alt="drawing" width="100%" >
+</p>
+<p align="center">
+   <p align="center">
+    Subalpine fir seed cones (photo credit: <a href="https://www.flickr.com/photos/76416226@N03/6881892262" target="_blank"> B. Leystra </a>). 
+</p>
 
-When you have a larger chunk of code, you can paste the whole code in the `Markdown` document and add three backticks on the line before the code chunks starts and on the line after the code chunks ends. After the three backticks that go before your code chunk starts, you can specify in which language the code is written, in our case `R`.
 
-To find the backticks on your keyboard, look towards the top left corner on a Windows computer, perhaps just above `Tab` and before the number one key. On a Mac, look around the left `Shift` key. You can also just copy the backticks from below.
 
+First we'll set up the RStudio working environment and load in this data.
 ```r
+## Set up----
+
 # Set the working directory
+
 setwd("your_filepath")
 
-# Load packages
-library(ggplot2)
+
+# Load your libraries
+
 library(dplyr)
+library(corrplot)
+library(MuMIn)
+library(predictmeans)
+library(InformationValue)
+library(caret)
+library(InformationValue)
+
+
+# Set a plot theme function
+
+plot_theme <- function(...){
+  theme_classic() +
+    theme(                                
+      axis.text = element_text(size = 7,                           # adjust axes
+                               colour = "black"),
+      axis.text.x = element_text(margin = margin(5, b = 10)),
+      axis.title = element_text(size = 6,
+                                colour = 'black'),
+      axis.ticks = element_blank(),
+      plot.background = element_rect(fill = "white",               # adjust background colors
+                                     colour = NA),
+      panel.background = element_rect(fill = "white",
+                                      colour = NA),
+      legend.background = element_rect(fill = NA,
+                                       colour = NA),
+      legend.title = element_text(size = 10),                      # adjust titles
+      legend.text = element_text(size = 16, hjust = 0,
+                                 colour = "black"),
+      plot.title = element_text(size = 17,
+                                colour = 'black',
+                                margin = margin(10, 10, 10, 10),
+                                hjust = 0.5),
+      plot.subtitle = element_text(size = 10, hjust = 0.5,
+                                   colour = "black",
+                                   margin = margin(0, 0, 30, 0)),
+      plot.caption = element_text(plot.caption = element_text(size = 50,
+                                                              hjust=0))
+      )
+}
+
+
+
+# Load data
+
+cones <- read_csv("data/cones.csv")
+summary(cones)  # look at general structure of the data
 ```
 
 <a name="section2"></a>
@@ -129,6 +212,15 @@ Everything below this is footer material - text and links that appears at the en
 </div>
 
 
+
+
+
+
+
+
+
+
+
 # Binomial Logistic Regression Tutorial
 
 <p align="center">
@@ -183,7 +275,6 @@ Our dataset is a mixture of cone abundance from Subalpine fir, *Abies lasiocarpa
 <p align="center">
    <p align="center">
    Engleman spruce seed cones (photo credit: <a href="https://https://www.conifers.org/pi/Picea_engelmannii.php" target="_blank"> C. Earle </a>).
-
 </p>
       
 <p align="center">
