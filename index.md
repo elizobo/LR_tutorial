@@ -64,10 +64,6 @@ Our dataset is a mixture of cone abundance from Subalpine fir, *Abies lasiocarpa
     Subalpine fir seed cones (photo credit: <a href="https://www.flickr.com/photos/76416226@N03/6881892262" target="_blank"> B. Leystra </a>). 
 </p>
 
-<pre>
-
-
-</pre>
 
 
 First we'll set up the RStudio working environment and load in this data.
