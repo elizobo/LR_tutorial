@@ -1,66 +1,5 @@
 
-
-
 # Binomial Logistic Regression Tutorial
-
-```r
-## Set up----
-
-# Set the working directory
-
-setwd("your_filepath")
-
-
-# Load your libraries
-
-library(dplyr)
-library(corrplot)
-library(MuMIn)
-library(predictmeans)
-library(InformationValue)
-library(caret)
-library(InformationValue)
-
-
-# Set a plot theme function
-
-plot_theme <- function(...){
-  theme_classic() +
-    theme(                                
-      axis.text = element_text(size = 7,                           # adjust axes
-                               colour = "black"),
-      axis.text.x = element_text(margin = margin(5, b = 10)),
-      axis.title = element_text(size = 6,
-                                colour = 'black'),
-      axis.ticks = element_blank(),
-      plot.background = element_rect(fill = "white",               # adjust background colors
-                                     colour = NA),
-      panel.background = element_rect(fill = "white",
-                                      colour = NA),
-      legend.background = element_rect(fill = NA,
-                                       colour = NA),
-      legend.title = element_text(size = 10),                      # adjust titles
-      legend.text = element_text(size = 16, hjust = 0,
-                                 colour = "black"),
-      plot.title = element_text(size = 17,
-                                colour = 'black',
-                                margin = margin(10, 10, 10, 10),
-                                hjust = 0.5),
-      plot.subtitle = element_text(size = 10, hjust = 0.5,
-                                   colour = "black",
-                                   margin = margin(0, 0, 30, 0)),
-      plot.caption = element_text(plot.caption = element_text(size = 50,
-                                                              hjust=0))
-      )
-}
-
-
-
-# Load data
-
-cones <- read_csv("data/cones.csv")
-summary(cones)  # look at general structure of the data
-```
 
 <p align="center">
    <img src="{{ site.baseurl }}/images/subalp_forest.png" alt="drawing" width="75%">
@@ -86,7 +25,7 @@ We often have work with binary data in ecology. Whether measuring germination su
 
 __All the B-word Terminology__
 
--   __Binary :__ Your data is binary if it has 2 outcomes. For example, left or right, pink or white, success or failure, presence or absence, yes or no. You can always represent these outcomes as '0' and '1'.
+-   __Binary__ : Your data is binary if it has 2 outcomes. For example, left or right, pink or white, success or failure, presence or absence, yes or no. You can always represent these outcomes as '0' and '1'.
 -   __Boolean__ : Your data is Boolean if you have combination outcomes you can define as binary data with values of true and false. You pretty much only have to think of data in this way if you're doing Boolean Algebra - building a deductive logical system (not part of this tutorial, phew).
 -   __Bernoulli__ : A Bernoulli trial/experiment is a single binary experiment. The outcome of this has Bernoulli distribution - the observed response of '0' or '1'.
 -   __Binomial__ : A binomial distribution describes the outcome of several Bernoulli trials - the probability that in X number of trials there will be Y number of '1' outcomes.
@@ -100,8 +39,17 @@ You can get all of the resources for this tutorial from <a href="https://github.
 
 For this tutorial we'll be looking into reproductive maturity of conifers. There is high variability in seed cone production among many northern temperate conifers, and we'll make a model to find reasons for this variation.
 
-Our dataset is a mixture of cone abundance from Subalpine fir, *Abies lasiocarpa*, and Engleman spruce, *Picea engelmannii* from southern Rocky Mountains, USA. The data is from this <a href="https://portal.edirepository.org/nis/home.jsp" target="_blank"> neat open source database site </a>.
+<p align="center">
+  <img src="{{ site.baseurl }}/images/engelman_cone2.png" alt="drawing" width="50%"/>
+  <img src="{{ site.baseurl }}/images/subalpfir_cone.png" alt="drawing" width="50%" > 
+</p>
+<p align="center">
+  Engleman spruce seed cones (photo credit: <a href="https://https://www.conifers.org/pi/Picea_engelmannii.php" target="_blank"> C. Earle </a>).
+  Subalpine fir seed cones (photo credit: <a href="https://www.flickr.com/photos/76416226@N03/6881892262" target="_blank"> B. Leystra </a>). 
+</p>
 
+
+Our dataset is a mixture of cone abundance from Subalpine fir, *Abies lasiocarpa*, and Engleman spruce, *Picea engelmannii* from southern Rocky Mountains, USA. The data is from this <a href="https://portal.edirepository.org/nis/home.jsp" target="_blank"> neat open source database site </a>.
 
 
 First we'll set up the RStudio working environment and load in this data.
@@ -174,7 +122,7 @@ The summary() function displays a summary statistics of data for each column:
 
 -  __Spec__: Tree species: ABLA (Subalpine fir) or PIEN (Engleman spruce)
 
--  **DBH**: Tree Diameter at Breast Height measurement (cm)
+-  __DBH__: Tree Diameter at Breast Height measurement (cm)
 
 -  __Age__: Tree age measured at the base of the tree in 2016
 
@@ -195,6 +143,7 @@ What effects conifer reproductive maturity? If cone presence is an indicator of 
 
 Before making a logistic regression model you have to check your data is suited for it. There are 6 assumptions we'll work through.
 
+
 __Assumption 1. Observations are independent__
 
 Each data point used to construct the model must be equally related. To check this we will print the first and last 6 rows of the data and check any metadata we have available.
@@ -210,11 +159,14 @@ From this we can gather that 1 measurement is taken every year for 3 years for e
 
 To account for these links and avoid pseudo replication we will have to account for them as random effects. You incorporate variables as random effects when they are not the main focus of a study but may impact the dependent variable. Random effects we'll need to include:
 
--   *treeID nested within Plot* : We aren't interested in how individual trees or trees within different plots differ, but these variables will impact the cone presence. This is known as a hierarchical random effect because it takes into account the structured clustering of the data; a tree within a plot.
+-   _treeID nested within Plot_ : We aren't interested in how individual trees or trees within different plots differ, but these variables will impact the cone presence. This is known as a hierarchical random effect because it takes into account the structured clustering of the data; a tree within a plot.
 
--   *year* : The year data was recorded may effect the cone presence measurements. For example, if one of the years was particularly hot there may be delayed cone production, reducing the number of trees recorded with cone presence. We aren't interested in this effect of year but we will take it's variation into account by making it a random effect.
+-   _year_ : The year data was recorded may effect the cone presence measurements. For example, if one of the years was particularly hot there may be delayed cone production, reducing the number of trees recorded with cone presence. We aren't interested in this effect of year but we will take it's variation into account by making it a random effect.
+ 
+<p align="center">
+   ASSUMPTION MET: If we take these variables into account as random effects, we can assume datapoints are independent.
+</p>
 
-ASSUMPTION MET: If we take these variables into account as random effects, we can assume datapoints are independent.
 
 __Assumption 2. The response variable is binomial__
 
@@ -231,6 +183,7 @@ conesbi <- cones %>%
 ```
 
 ASSUMPTION MET: We have a binomial response variable.
+
 
 __Assumption 3. Predictor variables are independent with no multicolinearity__
 
@@ -255,7 +208,10 @@ corrplot(correlations, method="circle") # create circle plot showing correlation
 
 There is a very strong positive relationship between tree age and DBH. Including them both in this model would violate this assumption, so they must be incorporated in models separately.
 
-ASSUMPTION MET: We will use DBH as the only fixed effect in this model so that it is an independent explanatory variable.
+<p align="center">
+   ASSUMPTION MET: We will use DBH as the only fixed effect in this model so that it is an independent explanatory variable.
+</p>
+
 
 __Assumption 4. There are no extreme outliers in the explanatory variable.__
 
@@ -278,6 +234,7 @@ boxplot(conesbi$DBH, main = "Boxplot")
 
 We can see there is a general under representation of older trees which may lead to outliers of our model. We will keep this in mind and check this assumption again using cooks distance test once we've built our model.
 
+
 **Assumption 5. There is a linear relationship between the explanatory variable and the logit of the response variable**
 
 To ensure the data relationship fits a binomial distribution there must be a linear relationship between the explanatory variable and the logit of the response variable. The logit function describes the non-linearity - the S-shape (sigmoid curve) - seen in logistic regression curves, so by applying to logit function it effectively linearises the relationship for our generalised linear model. 
@@ -292,8 +249,9 @@ boxTidwell(Presence ~ DBH, data = conesbi)
 
 If the p-value is significant the data fits the relationship; this test shows the correlation between presence and age will fit the sigmoid function of logistic regression.
 
-ASSUMPTION MET: There is a linear relationship between the explanatory and logit of the response.
-
+<p align="center">
+  ASSUMPTION MET: There is a linear relationship between the explanatory and logit of the response.
+</p>
 
 **Assumption 6. There is a sufficiently large sample size**
 
@@ -317,7 +275,9 @@ max_e_vars # print the maximum number of explanatory variables allowed in the mo
 
 -   A maximum of 62 explanatory variables are allowed in the model.
 
-ASSUMPTION MET: We will include less than 62 explanatory variables in the model.
+<p align="center">
+  ASSUMPTION MET: We will include less than 62 explanatory variables in the model.
+</p>
 
 Great! With all these assumptions met we know our data is suitable for a logistic regression and we can get along with building our model.
 
@@ -333,10 +293,13 @@ Great! With all these assumptions met we know our data is suitable for a logisti
 
 Before building your model, remind yourself of your research question :
 
-**How does tree age and species influence conifer reproductive maturity?**
+<p align="center">
+   __How does tree age and species influence conifer reproductive maturity?__
+</p>
 
 Make sure you know your response variable, explanatory variable(s) and random effects and their names within the model.
 
+<p align="center">
 | __Model parameter type__  | __Our model parameter__                                          | __Name in Rscript__ |
 |---------------------------|------------------------------------------------------------------|---------------------|
 | __Response variable__     | - conifer reproductive maturity, indicated by seed cone presence | - Presence          |
@@ -345,7 +308,7 @@ Make sure you know your response variable, explanatory variable(s) and random ef
 | __Random effects__        | - individual tree                                                | - ID                |
 |                           | - plot of trees                                                  | - Plot              |
 |                           | - measurement year                                               | - Year              |
-
+</p>
 
 #### __Check out the data__
 
@@ -743,24 +706,6 @@ In this tutorial you learned how to:
 
 Not sure if you understood anything you just read? Check yourself by doing the..
 
-<p align="center">
-   <p align="center">
-   <img src="{{ site.baseurl }}/images/engelman_cone2.png" alt="drawing" width="70%" > 
-</p>
-<p align="center">
-   <p align="center">
-   Engleman spruce seed cones (photo credit: <a href="https://https://www.conifers.org/pi/Picea_engelmannii.php" target="_blank"> C. Earle </a>).
-</p>
-      
-<p align="center">
-   <p align="center">
-   <img src="{{ site.baseurl }}/images/subalpfir_cone.png" alt="drawing" width="100%" >
-</p>
-<p align="center">
-   <p align="center">
-    Subalpine fir seed cones (photo credit: <a href="https://www.flickr.com/photos/76416226@N03/6881892262" target="_blank"> B. Leystra </a>). 
-</p>
-
 
 ## CHALLENGE
 
@@ -769,6 +714,11 @@ For some conifers, tree size has been shown to be a better indicator of cone pro
 See if this is true for this data by building a model using the tree age predictor variable instead of DBH. 
   - Is tree age a predictor of reproductive maturity for these confiers? 
   - Is it a stronger predictor than tree size? Does this differ between species?
+
+>! Answer code!
+
+
+>
 
 <hr>
 
