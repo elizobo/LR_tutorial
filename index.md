@@ -337,7 +337,7 @@ ggplot(data_dist, aes(factor(Presence), y = value, fill=factor(Presence))) +
 
 
 <p align="center">
-   <img src="{{ site.baseurl }}/images/distrib1.png" alt="drawing" width="50%">
+   <img src="{{ site.baseurl }}/images/distrib1.png" alt="drawing" width="70%">
 </p>
 <p align="center">
   Distribution plot for the continuous explanatory variable.
@@ -363,7 +363,7 @@ ggplot(conesbi, aes(x = DBH, y = Presence, colour = Spec)) +
 ```
 
 <p align="center">
-   <img src="{{ site.baseurl }}/images/distrib2.png" alt="drawing" width="50%">
+   <img src="{{ site.baseurl }}/images/distrib2.png" alt="drawing" width="70%">
 </p>
 <p align="center">
   Distribution plot for continuous and categorical explanatory variables.
@@ -444,7 +444,7 @@ model <- glm(Presence ~ DBH + Spec, family = "binomial", data = conesbi)
 CookD(model) # this might pop up in another window
 ```
 <p align="center">
-   <img src="{{ site.baseurl }}/images/cooks_d.png" alt="drawing" width="50%">
+   <img src="{{ site.baseurl }}/images/cooks_d.png" alt="drawing" width="80%">
 </p>
 <p align="center">
   Cooks distance plot with outliers labeled with reference numbers.
@@ -507,7 +507,7 @@ misClassError(test$Presence, predicted, threshold=optimal)  # print misclas erro
 
 This prints the misclassification error rate as 23% which is good to bear in mind when writing your results and working with model predictions.
 
-You can also use your model to make predictions given specific explanatory values. For example, to find the predictive probability of an Engleman spruce in Plot 1 with a DBH of 10cm having cone presence in 2018 you could do the following:
+You can also use your model to make predictions given specific explanatory values. For example, to find the predictive probability of an Engleman spruce in Plot 1 with a DBH of 10 cm having cone presence in 2018 you could do the following:
 
 ```r
 # Make predictions
@@ -585,7 +585,10 @@ We can then report :
 
 </pre>
 
-You want to present your models predictions. We can create marginal effects plots to show this.
+We can now present our model predictions by plotting predicted values (marginal effects) for specific model terms. 
+-  A marginal effect is the slope of the prediction function, measured for each variable in the model for each unit in the data. 
+-  We will extract and plot predicted values in response to the model term DBH to show its relationship with cone presence. 
+-  We will add a 95% confidence intervals to the plot showing the range of values that we expect the estimate to fall between 95% of the time. 
 
 ```r
 # PLOT model predictions----
@@ -680,7 +683,7 @@ ggsave(filename = 'images/p_cone_dbh_sp.png',
 
 ## The End
 
-This is the end of the tutorial. taadaa now you can have a walk outside, cup of tea and an unholy number of oreos then go get started on that report. Good job.
+This is the end of the tutorial. taadaa now you can have a walk outside, cup of tea and an unholy number of oreos then go get started on that report. Good stuff.
 
 <p align="center">
    <img src="{{ site.baseurl }}/images/Spruce-habitat.png" alt="drawing" width="75%">
@@ -694,7 +697,7 @@ In this tutorial you learned how to:
 
 ##### - check your data is appropriate for logistic regression
 
-##### - fix data so its appropriate for logistic regression
+##### - fix data so it is appropriate for logistic regression
 
 ##### - build a logistic regression model
 
@@ -704,12 +707,11 @@ In this tutorial you learned how to:
 
 ##### - report and present the results and predictions of your model
 
-Not sure if you understood anything you just read? Check yourself by doing the..
 
-
+Not sure if you understood anything you just read? Check yourself by doing the...
 ## CHALLENGE
 
-For some conifers, tree size has been shown to be a better indicator of cone production than tree age. This is possibly because tree size more strongly reflects a tree's access to resources than tree age.
+For some conifers tree size has been shown to be a better indicator of cone production than tree age. This is possibly because tree size more strongly reflects a tree's access to resources than tree age.
 
 See if this is true for this data by building a model using the tree age predictor variable instead of DBH. 
   - Is tree age a predictor of reproductive maturity for these confiers? 
