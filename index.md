@@ -21,7 +21,7 @@
 
 ## Basics for working with the binomial
 
-We often have work with binary data in ecology. Whether measuring germination success, the presence of a species in a quadrat, or an animal's behavior choice, we are left with a binary response variable. To see how this binary is effected by a continuous variable, often an environmental gradient, we can carry out logistic regression.
+We often have work with binary data in ecology. Whether measuring germination success, the presence of a species in a quadrat, or an animal's behavior choice, we are left with a binary response variable. To see how this binary is affected by a continuous variable (often an environmental gradient) we can carry out logistic regression.
 
 __All the B-word Terminology__
 
@@ -31,7 +31,28 @@ __All the B-word Terminology__
 -   __Binomial__ : A binomial distribution describes the outcome of several Bernoulli trials - the probability that in X number of trials there will be Y number of '1' outcomes.
 -   __Beta__ : A beta distribution also describes the outcome of several Bernoulli trials but as a probability of having '1' as an outcome, given the number of '1' and '0' outcomes from X number of trials. As the number of Bernoulli trials increases the beta distribution will change from a straight line to an increasingly arched bell shape.
 
-By classifying the binary variable outcomes as 0 and 1, logistic regression can use *maximum likelihood estimation* to calculate the probability that a given observation will take on a value of 1. Binomial logistic regression is a binomial regression but with a logit link function to make the relationship between the predictor and response variables linear. If you want to go into more of the maths have a read \<a href="<https://medium.com/deep-math-machine-learning-ai/chapter-2-0-logistic-regression-with-math-e9cbb3ec6077>["](https://portal.edirepository.org/nis/home.jsp%22) target="\_blank"\> here</a>, otherwise this tutorial can give you all you need to get your report underway from raw data to results.
+Binomial logistic regression is a type of Generalised Linear Model. If you have time and are interested here are some questions you aren't asking yourself but may make this whole concept clearer. If you aren't curious about the ins and outs, trot blindly on to the practical stuff. 
+
+__Why can't we use linear regression?__ 
+-  Well the assumptions of linear regression that a) residuals are normally distributed and b) the response variable is a continuous and unbounded ratio or interval value are both violated with this categorical binary response variable. 
+-  If we used our binary outcomes as the response variable (Y-axis on a graph) and fit a straight line, this doesn't represent the relationship very well. 
+-  Coding Club has tutorials on linear regression and GLMs if you want to know more about them. 
+
+__What do you mean by logistic?__ 
+-  By classifying the binary variable outcomes as 0 and 1, the model predicts the log-odds that each given observation (X-axis value) will take on a value of 1. Odds is the success:failure ratio, and the log-odds is the natural logarithm of this. Using these log-odds as the response (X-axis) provides a linear relationship for a GLM to be built. 
+-  A logit link (logistic) function is used to convert the log-odds to a probability, which is more intuitive for us. Using probability as the response variable (Y-axis) instead of using the categorical binary forms a sigmoidal S-shape relationship, which we understand but a GLM would not.
+
+__Um logit link function??__ 
+-  A link function is function of the mean of the response variable (Y-axis) that we use as the response (Y-axis) instead of response variable itself. So we use the logit of the response variable (Y-axis) instead of just the response variable. 
+-  The logit function is the natural log of the odds that the response will equal 1. 
+
+__Why binomial?__ 
+-  You can also have 3 categories in your response, e.g. short, medium and tall. 
+
+__What is Maximum likelihood estimation?__ 
+-  Maximum Likelihood Estimation is a frequentist probabilistic framework that seeks a set of parameters for the model that maximizes a likelihood function.
+
+We By classifying the binary variable outcomes as 0 and 1, logistic regression can use *maximum likelihood estimation* to calculate the probability that a given observation will take on a value of 1. Binomial logistic regression is a binomial regression but with a logit link function so that the sigmoid relationship between the predictor and response variables can be predicted. If you want to go into more of the maths have a read \<a href="<https://medium.com/deep-math-machine-learning-ai/chapter-2-0-logistic-regression-with-math-e9cbb3ec6077>["](https://portal.edirepository.org/nis/home.jsp%22) target="\_blank"\> here</a>, otherwise this tutorial can give you all you need to get your report underway from raw data to results.
 
 You can get all of the resources for this tutorial from <a href="https://github.com/elizobo/LR_tutorial" target="_blank">this GitHub repository</a>. Clone and download the repo as a zip file, then unzip it.
 
@@ -44,12 +65,11 @@ For this tutorial we'll be looking into reproductive maturity of conifers. There
   <img src="{{ site.baseurl }}/images/subalpfir_cone.png" alt="drawing" width="50%" > 
 </p>
 <p align="center">
-  Engleman spruce seed cones (photo credit: <a href="https://https://www.conifers.org/pi/Picea_engelmannii.php" target="_blank"> C. Earle </a>).
-  Subalpine fir seed cones (photo credit: <a href="https://www.flickr.com/photos/76416226@N03/6881892262" target="_blank"> B. Leystra </a>). 
+  Engleman spruce seed cones (photo credit: <a href="https://https://www.conifers.org/pi/Picea_engelmannii.php" target="_blank"> C. Earle </a>).                Subalpine fir seed cones (photo credit: <a href="https://www.flickr.com/photos/76416226@N03/6881892262" target="_blank"> B. Leystra </a>). 
 </p>
 
 
-Our dataset is a mixture of cone abundance from Subalpine fir, *Abies lasiocarpa*, and Engleman spruce, *Picea engelmannii* from southern Rocky Mountains, USA. The data is from this <a href="https://portal.edirepository.org/nis/home.jsp" target="_blank"> neat open source database site </a>.
+Our dataset is a mixture of cone abundance from Subalpine fir, _Abies lasiocarpa_, and Engleman spruce, _Picea engelmannii_ from southern Rocky Mountains, USA. The data is from this <a href="https://portal.edirepository.org/nis/home.jsp" target="_blank"> neat open source database site </a>.
 
 
 First we'll set up the RStudio working environment and load in this data.
@@ -235,7 +255,7 @@ boxplot(conesbi$DBH, main = "Boxplot")
 We can see there is a general under representation of older trees which may lead to outliers of our model. We will keep this in mind and check this assumption again using cooks distance test once we've built our model.
 
 
-**Assumption 5. There is a linear relationship between the explanatory variable and the logit of the response variable**
+__Assumption 5. There is a linear relationship between the explanatory variable and the logit of the response variable__
 
 To ensure the data relationship fits a binomial distribution there must be a linear relationship between the explanatory variable and the logit of the response variable. The logit function describes the non-linearity - the S-shape (sigmoid curve) - seen in logistic regression curves, so by applying to logit function it effectively linearises the relationship for our generalised linear model. 
 
@@ -253,7 +273,7 @@ If the p-value is significant the data fits the relationship; this test shows th
   ASSUMPTION MET: There is a linear relationship between the explanatory and logit of the response.
 </p>
 
-**Assumption 6. There is a sufficiently large sample size**
+__Assumption 6. There is a sufficiently large sample size__
 
 The model must contain a minimum of 10 observations of the least frequent outcome for each explanatory variable.
 
