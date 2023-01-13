@@ -85,8 +85,8 @@ You can get all of the resources for this tutorial from <a href="https://github.
 For this tutorial we'll be looking into reproductive maturity of conifers. There is high variability in seed cone production among many northern temperate conifers, and we'll make a model to find reasons for this variation.
 
 <p align="center">
-  <img src="{{ site.baseurl }}/images/engelman_cone2.png" alt="drawing" width="50%"/>
-  <img src="{{ site.baseurl }}/images/subalpfir_cone.png" alt="drawing" width="50%" > 
+  <img src="{{ site.baseurl }}/images/engelman_cone2.png" alt="drawing" width="25%"/>
+  <img src="{{ site.baseurl }}/images/subalpfir_cone.png" alt="drawing" width="25%" > 
 </p>
 <p align="center">
   Engleman spruce seed cones (photo credit: <a href="https://https://www.conifers.org/pi/Picea_engelmannii.php" target="_blank"> C. Earle </a>).                Subalpine fir seed cones (photo credit: <a href="https://www.flickr.com/photos/76416226@N03/6881892262" target="_blank"> B. Leystra </a>). 
