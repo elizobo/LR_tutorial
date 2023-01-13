@@ -26,12 +26,36 @@ We often have work with binary data in ecology. Whether measuring germination su
 __All the B-word Terminology__
 
 -   __Binary__ : Your data is binary if it has 2 outcomes. For example, left or right, pink or white, success or failure, presence or absence, yes or no. You can always represent these outcomes as '0' and '1'.
+<p align="center">
+   <img src="{{ site.baseurl }}/images/binomial.png" alt="drawing" width="75%">
+</p>
+
 -   __Boolean__ : Your data is Boolean if you have combination outcomes you can define as binary data with values of true and false. You pretty much only have to think of data in this way if you're doing Boolean Algebra - building a deductive logical system (not part of this tutorial, phew).
+<p align="center">
+   <img src="{{ site.baseurl }}/images/bernoulli1.png" alt="drawing" width="75%"/>
+   <img src="{{ site.baseurl }}/images/bernouli2.png" alt="drawing" width="75%">
+</p>
+
 -   __Bernoulli__ : A Bernoulli trial/experiment is a single binary experiment. The outcome of this has Bernoulli distribution - the observed response of '0' or '1'.
+<p align="center">
+   <img src="{{ site.baseurl }}/images/beta.png" alt="drawing" width="75%">
+</p>
+
 -   __Binomial__ : A binomial distribution describes the outcome of several Bernoulli trials - the probability that in X number of trials there will be Y number of '1' outcomes.
+<p align="center">
+   <img src="{{ site.baseurl }}/images/beta.png" alt="drawing" width="75%">
+</p>
+
 -   __Beta__ : A beta distribution also describes the outcome of several Bernoulli trials but as a probability of having '1' as an outcome, given the number of '1' and '0' outcomes from X number of trials. As the number of Bernoulli trials increases the beta distribution will change from a straight line to an increasingly arched bell shape.
+<p align="center">
+   <img src="{{ site.baseurl }}/images/actualbeta.png" alt="drawing" width="75%">
+</p>
 
 Binomial logistic regression is a type of Generalised Linear Model. If you have time and are interested here are some questions you aren't asking yourself but may make this whole concept clearer. If you aren't curious about the ins and outs, trot blindly on to the practical stuff. 
+
+<p align="center">
+   <img src="{{ site.baseurl }}/images/logit.png" alt="drawing" width="75%">
+</p>
 
 __Why can't we use linear regression?__ 
 -  Well the assumptions of linear regression that a) residuals are normally distributed and b) the response variable is a continuous and unbounded ratio or interval value are both violated with this categorical binary response variable. 
