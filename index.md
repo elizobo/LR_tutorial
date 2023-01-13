@@ -58,25 +58,54 @@ Binomial logistic regression is a type of Generalised Linear Model. If you have 
 </p>
 
 __Why can't we use linear regression?__ 
+<details>
+  <summary>Click for answer</summary>
+  
 -  Well the assumptions of linear regression that a) residuals are normally distributed and b) the response variable is a continuous and unbounded ratio or interval value are both violated with this categorical binary response variable. 
 -  If we used our binary outcomes as the response variable (Y-axis on a graph) and fit a straight line, this doesn't represent the relationship very well. 
 -  Coding Club has tutorials on linear regression and GLMs if you want to know more about them. 
+   
+</details>
 
 __What do you mean by logistic?__ 
+<details>
+  <summary>Click for answer</summary>
+  
 -  By classifying the binary variable outcomes as 0 and 1, the model predicts the log-odds that each given observation (X-axis value) will take on a value of 1. Odds is the success:failure ratio, and the log-odds is the natural logarithm of this. Using these log-odds as the response (X-axis) provides a linear relationship for a GLM to be built. 
 -  A logit link (logistic) function is used to convert the log-odds to a probability, which is more intuitive for us. Using probability as the response variable (Y-axis) instead of using the categorical binary forms a sigmoidal S-shape relationship, which we understand but a GLM would not.
 
+   
+</details>
+
 __Um logit link function??__ 
+<details>
+  <summary>Click for answer</summary>
+  
 -  A link function is function of the mean of the response variable (Y-axis) that we use as the response (Y-axis) instead of response variable itself. So we use the logit of the response variable (Y-axis) instead of just the response variable. 
 -  The logit function is the natural log of the odds that the response will equal 1. 
+   
+</details>
 
 __Why binomial?__ 
--  You can also have 3 categories in your response, e.g. short, medium and tall. 
+<details>
+  <summary>Click for answer</summary>
+  
+-  Binomial logistic regression deals with binary categorical response variables, but other types of logistic regression can deal with more than 2 categories
+-  Multinomial logistic regression: Deals with response variables with three or more categories with no natural ordering among the categories (e.g. a hat trick producing nothing, a rabbit or stars).
+-  Ordinal logistic regression: The response variable can belong to one of three or more categories and there is a natural ordering among the categories (e.g. a hat trick producing a rabbit with white, white and black spotted or black fur).
 
-__What is Maximum likelihood estimation?__ 
--  Maximum Likelihood Estimation is a frequentist probabilistic framework that seeks a set of parameters for the model that maximizes a likelihood function.
+</details>
 
-We By classifying the binary variable outcomes as 0 and 1, logistic regression can use *maximum likelihood estimation* to calculate the probability that a given observation will take on a value of 1. Binomial logistic regression is a binomial regression but with a logit link function so that the sigmoid relationship between the predictor and response variables can be predicted. If you want to go into more of the maths have a read \<a href="<https://medium.com/deep-math-machine-learning-ai/chapter-2-0-logistic-regression-with-math-e9cbb3ec6077>["](https://portal.edirepository.org/nis/home.jsp%22) target="\_blank"\> here</a>, otherwise this tutorial can give you all you need to get your report underway from raw data to results.
+__What is maximum likelihood estimation?__ 
+<details>
+  <summary>Click for answer</summary>
+  
+-  Logistic regression uses maximum likelihood estimation to fit a model.
+-  In maximum likelihood estimation a set of parameters is chosen for a model that maximizes a likelihood function.
+
+</details>
+
+If you want to go into more of the maths have a read \<a href="<https://medium.com/deep-math-machine-learning-ai/chapter-2-0-logistic-regression-with-math-e9cbb3ec6077>["](https://portal.edirepository.org/nis/home.jsp%22) target="\_blank"\> here</a>, otherwise this tutorial can give you all you need to get your report underway from raw data to results.
 
 You can get all of the resources for this tutorial from <a href="https://github.com/elizobo/LR_tutorial" target="_blank">this GitHub repository</a>. Clone and download the repo as a zip file, then unzip it.
 
@@ -761,10 +790,24 @@ See if this is true for this data by building a model using the tree age predict
   - Is tree age a predictor of reproductive maturity for these confiers? 
   - Is it a stronger predictor than tree size? Does this differ between species?
 
->! Answer code!
+<details>
+  <summary>Click for answer</summary>
+  
+  ### Heading
+  1. Foo
+  2. Bar
+     * Baz
+     * Qux
+
+  ### Some Code
+  ```js
+  function logSomething(something) {
+    console.log('Something', something);
+  }
+  ```
+</details>
 
 
->
 
 <hr>
 
