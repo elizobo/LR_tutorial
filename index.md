@@ -27,13 +27,13 @@ __All the B-word Terminology__
 
 -   __Binary__ : Your data is binary if it has 2 outcomes. For example, left or right, pink or white, success or failure, presence or absence, yes or no. You can always represent these outcomes as '0' and '1'.
 <p align="center">
-   <img src="{{ site.baseurl }}/images/binomial.png" alt="drawing" width="20%">
+   <img src="{{ site.baseurl }}/images/binomial.png" alt="drawing" width="30%">
 </p>
 
 -   __Boolean__ : Your data is Boolean if you have combination outcomes you can define as binary data with values of true and false. You pretty much only have to think of data in this way if you're doing Boolean Algebra - building a deductive logical system (not part of this tutorial, phew).
 <p align="center">
-   <img src="{{ site.baseurl }}/images/bernoulli1.png" alt="drawing" width="20%"/>
-   <img src="{{ site.baseurl }}/images/bernouli2.png" alt="drawing" width="20%">
+   <img src="{{ site.baseurl }}/images/bernoulli1.png" alt="drawing" width="30%"/>&nbsp;&nbsp;&nbsp;&nbsp;
+   &nbsp;&nbsp;&nbsp;&nbsp;<img src="{{ site.baseurl }}/images/bernouli2.png" alt="drawing" width="30%">
 </p>
 
 -   __Bernoulli__ : A Bernoulli trial/experiment is a single binary experiment. The outcome of this has Bernoulli distribution - the observed response of '0' or '1'.
@@ -85,11 +85,11 @@ You can get all of the resources for this tutorial from <a href="https://github.
 For this tutorial we'll be looking into reproductive maturity of conifers. There is high variability in seed cone production among many northern temperate conifers, and we'll make a model to find reasons for this variation.
 
 <p align="center">
-  <img src="{{ site.baseurl }}/images/engelman_cone2.png" alt="drawing" width="25%"/>
-  <img src="{{ site.baseurl }}/images/subalpfir_cone.png" alt="drawing" width="25%" > 
+  <img src="{{ site.baseurl }}/images/engelman_cone2.png" alt="drawing" width="25%"/>&nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;<img src="{{ site.baseurl }}/images/subalpfir_cone.png" alt="drawing" width="25%" > 
 </p>
 <p align="center">
-  Engleman spruce seed cones (photo credit: <a href="https://https://www.conifers.org/pi/Picea_engelmannii.php" target="_blank"> C. Earle </a>).                Subalpine fir seed cones (photo credit: <a href="https://www.flickr.com/photos/76416226@N03/6881892262" target="_blank"> B. Leystra </a>). 
+  Engleman spruce seed cones (photo credit: <a href="https://https://www.conifers.org/pi/Picea_engelmannii.php" target="_blank"> C. Earle </a>).&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Subalpine fir seed cones (photo credit: <a href="https://www.flickr.com/photos/76416226@N03/6881892262" target="_blank"> B. Leystra </a>). 
 </p>
 
 
