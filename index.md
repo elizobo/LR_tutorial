@@ -183,7 +183,7 @@ What effects conifer reproductive maturity? If cone presence is an indicator of 
 
 </pre>
 
-## 1. Check assumptions of binomial logistic regression
+## 1.  Check assumptions of binomial logistic regression
 
 Before making a logistic regression model you have to check your data is suited for it. There are 6 assumptions we'll work through.
 
@@ -333,7 +333,7 @@ Great! With all these assumptions met we know our data is suitable for a logisti
 
 <a name="section2"></a>
 
-## 2. Build a binomial logistic regression model
+## 2.  Build a binomial logistic regression model
 
 Before building your model, remind yourself of your research question :
 
@@ -472,7 +472,7 @@ This prints the AICc values of all the models with dbh.mod having the lowest. Th
 
 <a name="section3"></a>
 
-## 3. Testing a logistic regression model
+## 3.  Testing a logistic regression model
 
 Now we have our model we can test its predictive capacity and check for outstanding outliers (assumption 4).
 
@@ -568,7 +568,7 @@ This prints 0.1113638, meaning a tree with these attributes would have 11% likel
 
 <a name="section4"></a>
 
-## 4. Presenting and reporting model results
+## 4.  Presenting and reporting model results
 
 Now we know our model is pretty good we can draw any results from it. First we'll look at the model summary.
 
