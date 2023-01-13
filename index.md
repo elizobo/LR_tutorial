@@ -809,7 +809,7 @@ See if this is true for this data by building a model using the tree age predict
 <details>
   <summary>Click for code</summary>
  
-   ```r
+   ```js
    
   # CHALLENGE----
    # CHECKING ASSUMPTIONS
