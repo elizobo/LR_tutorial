@@ -32,8 +32,8 @@ __All the B-word Terminology__
 
 -   __Boolean__ : Your data is Boolean if you have combination outcomes you can define as binary data with values of true and false. You pretty much only have to think of data in this way if you're doing Boolean Algebra - building a deductive logical system (not part of this tutorial, phew).
 <p align="center">
-   <img src="{{ site.baseurl }}/images/bernoulli1.png" alt="drawing" width="30%"/>&nbsp;&nbsp;&nbsp;&nbsp;
-   &nbsp;&nbsp;&nbsp;&nbsp;<img src="{{ site.baseurl }}/images/bernouli2.png" alt="drawing" width="30%">
+   <img src="{{ site.baseurl }}/images/bernoulli1.png" alt="drawing" width="50%"/>&nbsp;&nbsp;&nbsp;&nbsp;
+   &nbsp;&nbsp;&nbsp;&nbsp;<img src="{{ site.baseurl }}/images/bernouli2.png" alt="drawing" width="50%">
 </p>
 
 -   __Bernoulli__ : A Bernoulli trial/experiment is a single binary experiment. The outcome of this has Bernoulli distribution - the observed response of '0' or '1'.
@@ -43,13 +43,15 @@ __All the B-word Terminology__
 
 -   __Binomial__ : A binomial distribution describes the outcome of several Bernoulli trials - the probability that in X number of trials there will be Y number of '1' outcomes.
 <p align="center">
-   <img src="{{ site.baseurl }}/images/actualbeta.png" alt="drawing" width="80%">
+   <img src="{{ site.baseurl }}/images/actualbeta.png" alt="drawing" width="60%">
 </p>
 
 -   __Beta__ : A beta distribution also describes the outcome of several Bernoulli trials but as a probability of having '1' as an outcome, given the number of '1' and '0' outcomes from X number of trials. As the number of Bernoulli trials increases the beta distribution will change from a straight line to an increasingly arched bell shape.
 <p align="center">
    <img src="{{ site.baseurl }}/images/PDF-graph.png" alt="drawing" width="50%">
 </p>
+
+
 
 Binomial logistic regression is a type of Generalised Linear Model. If you have time and are interested here are some questions you aren't asking yourself but may make this whole concept clearer. If you aren't curious about the ins and outs, trot blindly on to the practical stuff. 
 
@@ -61,18 +63,20 @@ __Why can't we use linear regression?__
 <details>
   <summary>Click for answer</summary>
   
--  Well the assumptions of linear regression that a) residuals are normally distributed and b) the response variable is a continuous and unbounded ratio or interval value are both violated with this categorical binary response variable. 
--  If we used our binary outcomes as the response variable (Y-axis on a graph) and fit a straight line, this doesn't represent the relationship very well. 
--  Coding Club has tutorials on linear regression and GLMs if you want to know more about them. 
+* Well the assumptions of linear regression that a) residuals are normally distributed and b) the response variable is a continuous and unbounded ratio or interval value are both violated with this categorical binary response variable. 
+* If we used our binary outcomes as the response variable (Y-axis on a graph) and fit a straight line, this doesn't represent the relationship very well. 
+* Coding Club has tutorials on linear regression and GLMs if you want to know more about them. 
    
 </details>
+
+
 
 __What do you mean by logistic?__ 
 <details>
   <summary>Click for answer</summary>
   
--  By classifying the binary variable outcomes as 0 and 1, the model predicts the log-odds that each given observation (X-axis value) will take on a value of 1. Odds is the success:failure ratio, and the log-odds is the natural logarithm of this. Using these log-odds as the response (X-axis) provides a linear relationship for a GLM to be built. 
--  A logit link (logistic) function is used to convert the log-odds to a probability, which is more intuitive for us. Using probability as the response variable (Y-axis) instead of using the categorical binary forms a sigmoidal S-shape relationship, which we understand but a GLM would not.
+* By classifying the binary variable outcomes as 0 and 1, the model predicts the log-odds that each given observation (X-axis value) will take on a value of 1. Odds is the success:failure ratio, and the log-odds is the natural logarithm of this. Using these log-odds as the response (X-axis) provides a linear relationship for a GLM to be built. 
+* A logit link (logistic) function is used to convert the log-odds to a probability, which is more intuitive for us. Using probability as the response variable (Y-axis) instead of using the categorical binary forms a sigmoidal S-shape relationship, which we understand but a GLM would not.
 
    
 </details>
@@ -81,8 +85,8 @@ __Um logit link function??__
 <details>
   <summary>Click for answer</summary>
   
--  A link function is function of the mean of the response variable (Y-axis) that we use as the response (Y-axis) instead of response variable itself. So we use the logit of the response variable (Y-axis) instead of just the response variable. 
--  The logit function is the natural log of the odds that the response will equal 1. 
+* A link function is function of the mean of the response variable (Y-axis) that we use as the response (Y-axis) instead of response variable itself. So we use the logit of the response variable (Y-axis) instead of just the response variable. 
+* The logit function is the natural log of the odds that the response will equal 1. 
    
 </details>
 
@@ -90,10 +94,10 @@ __Why binomial?__
 <details>
   <summary>Click for answer</summary>
   
--  Logistic regression refers to any regression model in which the response variable is categorical.
--  Binomial logistic regression deals with binary categorical response variables, but other types of logistic regression can deal with more than 2 categories.
--  Multinomial logistic regression: Deals with response variables with three or more categories with no natural ordering among the categories (e.g. a hat trick producing nothing, a rabbit or stars).
--  Ordinal logistic regression: The response variable can belong to one of three or more categories and there is a natural ordering among the categories (e.g. a hat trick producing a rabbit with white, white and black spotted or black fur).
+* Logistic regression refers to any regression model in which the response variable is categorical.
+* Binomial logistic regression deals with binary categorical response variables, but other types of logistic regression can deal with more than 2 categories.
+* Multinomial logistic regression: Deals with response variables with three or more categories with no natural ordering among the categories (e.g. a hat trick producing nothing, a rabbit or stars).
+* Ordinal logistic regression: The response variable can belong to one of three or more categories and there is a natural ordering among the categories (e.g. a hat trick producing a rabbit with white, white and black spotted or black fur).
 
 </details>
 
@@ -101,8 +105,8 @@ __What is maximum likelihood estimation?__
 <details>
   <summary>Click for answer</summary>
   
--  Logistic regression uses maximum likelihood estimation to fit a model.
--  In maximum likelihood estimation a set of parameters is chosen for a model that maximizes a likelihood function.
+* Logistic regression uses maximum likelihood estimation to fit a model.
+* In maximum likelihood estimation a set of parameters is chosen for a model that maximizes a likelihood function.
 
 </details>
 
