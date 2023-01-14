@@ -137,7 +137,7 @@ __What is maximum likelihood estimation?__
    <img src="{{ site.baseurl }}/images/logit.png" alt="drawing" width="80%">
 </p>
 <p align="center">
-  Working with binary data: a) the inability to represent a binomial regression linearly (left), b) the ability to linearly represent it if using log-odds of presence as the response (centre) and c) using a logit link function to convert the response to probability, forming a sigmoidal relationship. 
+  Working with binary data: a) the inability to represent a the relationship of binomial data linearly (left), b) the ability to linearly represent it if using log-odds of presence as the response (centre) and c) using a logit link function to convert the response to probability, forming a sigmoidal relationship. 
 </p>
 
 If you want to go into more of the maths have a read <a href="[https://www.flickr.com/photos/codiferous/7978232221/in/photostream/](https://medium.com/deep-math-machine-learning-ai/chapter-2-0-logistic-regression-with-math-e9cbb3ec6077)" target="_blank">here</a>, otherwise this tutorial can give you all you need to get your report underway from raw data to results.
