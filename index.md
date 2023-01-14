@@ -76,12 +76,12 @@ __What do you mean by logistic?__
 <details>
   <summary>Click for answer</summary>
   
-   <pre>
+   <p>
    
    * By classifying the binary variable outcomes as 0 and 1, the model predicts the log-odds that each given observation (X-axis value) will take on a value of 1. Odds is the success:failure ratio, and the log-odds is the natural logarithm of this. Using these log-odds as the response (X-axis) provides a linear relationship for a GLM to be built. 
    * A logit link (logistic) function is used to convert the log-odds to a probability, which is more intuitive for us. Using probability as the response variable (Y-axis) instead of using the categorical binary forms a sigmoidal S-shape relationship, which we understand but a GLM would not.
    
-   </pre>
+   </p>
 
 </details>
 
@@ -91,12 +91,12 @@ __Um logit link function??__
 <details>
   <summary>Click for answer</summary>
    
-   <pre>
+   <p>
   
    * A link function is function of the mean of the response variable (Y-axis) that we use as the response (Y-axis) instead of response variable itself. So we use the logit of the response variable (Y-axis) instead of just the response variable. 
    * The logit function is the natural log of the odds that the response will equal 1. 
    
-   </pre>
+   </p>
 
 </details>
 
@@ -106,14 +106,14 @@ __Why binomial?__
 <details>
   <summary>Click for answer</summary>
    
-   <pre>
+   <p>
 
    * Logistic regression refers to any regression model in which the response variable is categorical.
    * Binomial logistic regression deals with binary categorical response variables, but other types of logistic regression can deal with more than 2 categories.
    * Multinomial logistic regression: Deals with response variables with three or more categories with no natural ordering among the categories (e.g. a hat trick producing nothing, a rabbit or stars).
    * Ordinal logistic regression: The response variable can belong to one of three or more categories and there is a natural ordering among the categories (e.g. a hat trick producing a rabbit with white, white and black spotted or black fur).
    
-   </pre>
+   </p>
 
 </details>
 
@@ -123,12 +123,12 @@ __What is maximum likelihood estimation?__
 <details>
   <summary>Click for answer</summary>
    
-   <pre>
+   <p>
   
    * Logistic regression uses maximum likelihood estimation to fit a model.
    * In maximum likelihood estimation a set of parameters is chosen for a model that maximizes a likelihood function.
    
-   </pre>
+   </p>
 
 </details>
 <br/>
