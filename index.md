@@ -55,22 +55,23 @@ __All the B-word Terminology__
 
 Binomial logistic regression is a type of Generalised Linear Model (GLM). You can always give yourself a refresher on model building with <a href="(https://ourcodingclub.github.io/tutorials/model-design/)" target="_blank">this Coding Club tutorial</a>. If you have time and are interested below are some questions which although you aren't asking yourself, may make the whole binomial logistic regression concept a bit clearer for the tutorial ahead. If you aren't curious about the ins and outs, trot blindly past these questions on to the practical stuff. 
 
-# A collapsible section with markdown
-<details>
-  <summary>Click to expand!</summary>
-  
-  ## Heading
-  1. A numbered
-  2. list
-     * With some
-     * Sub bullets
+
+- <details><summary>Detail 1</summary>
+
+     - Detail 1.1
+     - Detail 1.2
+
+- <details><summary>Detail 2</summary>
+
+     - Detail 2.1
+     - Detail 2.2
+
+</details>
 </details>
 
-<details>
-  <summary>__Why can't we use linear regression?__</summary>
-  
-   <p>
-   
+
+<details><summary>__Why can't we use linear regression?__</summary>
+
 	   
    - Well the assumptions of linear regression that a) residuals are normally distributed and b) the response variable is a continuous and unbounded ratio or interval value are both violated with this categorical binary response variable. 
 	   
