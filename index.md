@@ -310,7 +310,6 @@ conesbi <- cones %>%
 </p>
 <br/>
 <br/>
-
 __Assumption 3. Predictor variables are independent with no multicolinearity__
 
 Predictor variables included in the model as fixed effects must be independent. Non of the predictor variables can be related to any of the others otherwise they will explain the same variation in the response variable, and the model will appear more powerful than it actually is.
@@ -361,7 +360,6 @@ boxplot(conesbi$DBH, main = "Boxplot")
 We can see there is a general under representation of older trees which may lead to outliers of our model. We will keep this in mind and check this assumption again using cooks distance test once we've built our model.
 <br/>
 <br/>
-
 __Assumption 5. There is a linear relationship between the explanatory variable and the logit of the response variable__
 
 To ensure the data relationship fits a binomial distribution there must be a linear relationship between the explanatory variable and the logit of the response variable. The logit function describes the non-linearity - the S-shape (sigmoid curve) - seen in logistic regression curves, so by applying to logit function it effectively linearises the relationship for our generalised linear model. 
@@ -381,7 +379,6 @@ If the p-value (Pr(>[z]) is significant (below 0.05, also indicated by asterisks
 </p>
 <br/>
 <br/>
-
 __Assumption 6. There is a sufficiently large sample size__
 
 The model must contain a minimum of 10 observations of the least frequent outcome for each explanatory variable.
