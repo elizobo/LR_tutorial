@@ -58,10 +58,27 @@ Binomial logistic regression is a type of Generalised Linear Model (GLM). You ca
 __Why can't we use linear regression?__ 
 
 <details>
+<summary><b>Preview title</b></summary>
+
+_Markdown is valid, but add empty lines to separate from the HTML tags._
+
+- Bullet
+- Points
+
+```json
+{
+    "codeblock": "demo"
+}
+```
+
+</details>
+
+<details>
   <summary>Click for answer</summary>
   
    <p>
    
+	   
    - Well the assumptions of linear regression that a) residuals are normally distributed and b) the response variable is a continuous and unbounded ratio or interval value are both violated with this categorical binary response variable. 
 	   
    - If we used our binary outcomes as the response variable (Y-axis on a graph) and fit a straight line, this doesn't represent the relationship very well. 
