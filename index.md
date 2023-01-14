@@ -64,13 +64,17 @@ Binomial logistic regression is a type of Generalised Linear Model (GLM). You ca
      - Coding Club has <a href="(https://ourcodingclub.github.io/tutorials/mixed-models/)" target="_blank">tutorials on linear regression</a> if you want to know more about them. 
 </pre>
 
+</details>
+
 - <details><summary>Um logit link function??</summary>
 
 <pre>
      - A link function is function of the mean of the response variable (Y-axis) that we use as the response (Y-axis) instead of response variable itself. So we use the logit of the response variable (Y-axis) instead of just the response variable. 
      - The logit function is the natural log of the odds that the response will equal 1. 
 </pre>
-	
+
+</details>
+
 - <details><summary>Why binomial?</summary>
 
 <pre>
@@ -79,6 +83,8 @@ Binomial logistic regression is a type of Generalised Linear Model (GLM). You ca
      - Multinomial logistic regression: Deals with response variables with three or more categories with no natural ordering among the categories (e.g. a hat trick producing nothing, a rabbit or stars).   
      - Ordinal logistic regression: The response variable can belong to one of three or more categories and there is a natural ordering among the categories (e.g. a hat trick producing a rabbit with white, white and black spotted or black fur).
 </pre>
+
+</details>
 	
 - <details><summary>What is maximum likelihood estimation?</summary>
 
@@ -86,15 +92,8 @@ Binomial logistic regression is a type of Generalised Linear Model (GLM). You ca
      - Logistic regression uses maximum likelihood estimation to fit a model.  
      - In maximum likelihood estimation a set of parameters is chosen for a model that maximizes a likelihood function.
 </pre>
-	
-
 
 </details>
-</details>
-</details>
-</details>
-	   
-
 
 
 <details>
