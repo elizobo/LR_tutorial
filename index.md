@@ -57,7 +57,7 @@ Binomial logistic regression is a type of Generalised Linear Model (GLM). You ca
 
 
 <details>
-	<summary>Why can't we use linear regression?</summary>
+	<summary><b>Why can't we use linear regression?</b></summary>
 
 <p>
 	
@@ -73,7 +73,7 @@ Coding Club has <a href="(https://ourcodingclub.github.io/tutorials/mixed-models
 </details>
 
 <details>
-	<summary>Um logit link function??</summary>
+	<summary><b>Um logit link function??</b></summary>
 
 <pre>
 
@@ -86,7 +86,7 @@ The logit function is the natural log of the odds that the response will equal 1
 </details>
 
 <details>
-	<summary>Why binomial?</summary>
+	<summary><b>Why binomial?</b></summary>
 
 	<pre>
 Logistic regression refers to any regression model in which the response variable is categorical.   
@@ -101,7 +101,7 @@ Ordinal logistic regression: The response variable can belong to one of three or
 </details>
 	
 <details>
-	<summary>What is maximum likelihood estimation?</summary>
+	<summary><b>What is maximum likelihood estimation?</b></summary>
 	
 <pre>
 Logistic regression uses maximum likelihood estimation to fit a model.  
