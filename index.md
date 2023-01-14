@@ -63,10 +63,10 @@ __Why can't we use linear regression?__
 <details>
   <summary>Click for answer</summary>
   
-* Well the assumptions of linear regression that a) residuals are normally distributed and b) the response variable is a continuous and unbounded ratio or interval value are both violated with this categorical binary response variable. 
-* If we used our binary outcomes as the response variable (Y-axis on a graph) and fit a straight line, this doesn't represent the relationship very well. 
-* Coding Club has tutorials on linear regression and GLMs if you want to know more about them. 
-   
+   * Well the assumptions of linear regression that a) residuals are normally distributed and b) the response variable is a continuous and unbounded ratio or interval value are both violated with this categorical binary response variable. 
+   * If we used our binary outcomes as the response variable (Y-axis on a graph) and fit a straight line, this doesn't represent the relationship very well. 
+   * Coding Club has tutorials on linear regression and GLMs if you want to know more about them. 
+
 </details>
 
 <br/>
@@ -76,8 +76,8 @@ __What do you mean by logistic?__
 <details>
   <summary>Click for answer</summary>
   
-* By classifying the binary variable outcomes as 0 and 1, the model predicts the log-odds that each given observation (X-axis value) will take on a value of 1. Odds is the success:failure ratio, and the log-odds is the natural logarithm of this. Using these log-odds as the response (X-axis) provides a linear relationship for a GLM to be built. 
-* A logit link (logistic) function is used to convert the log-odds to a probability, which is more intuitive for us. Using probability as the response variable (Y-axis) instead of using the categorical binary forms a sigmoidal S-shape relationship, which we understand but a GLM would not.
+   * By classifying the binary variable outcomes as 0 and 1, the model predicts the log-odds that each given observation (X-axis value) will take on a value of 1. Odds is the success:failure ratio, and the log-odds is the natural logarithm of this. Using these log-odds as the response (X-axis) provides a linear relationship for a GLM to be built. 
+   * A logit link (logistic) function is used to convert the log-odds to a probability, which is more intuitive for us. Using probability as the response variable (Y-axis) instead of using the categorical binary forms a sigmoidal S-shape relationship, which we understand but a GLM would not.
 
    
 </details>
@@ -89,9 +89,9 @@ __Um logit link function??__
 <details>
   <summary>Click for answer</summary>
   
-* A link function is function of the mean of the response variable (Y-axis) that we use as the response (Y-axis) instead of response variable itself. So we use the logit of the response variable (Y-axis) instead of just the response variable. 
-* The logit function is the natural log of the odds that the response will equal 1. 
-   
+   * A link function is function of the mean of the response variable (Y-axis) that we use as the response (Y-axis) instead of response variable itself. So we use the logit of the response variable (Y-axis) instead of just the response variable. 
+   * The logit function is the natural log of the odds that the response will equal 1. 
+
 </details>
 
 <br/>
@@ -100,11 +100,11 @@ __Um logit link function??__
 __Why binomial?__ 
 <details>
   <summary>Click for answer</summary>
-  
-* Logistic regression refers to any regression model in which the response variable is categorical.
-* Binomial logistic regression deals with binary categorical response variables, but other types of logistic regression can deal with more than 2 categories.
-* Multinomial logistic regression: Deals with response variables with three or more categories with no natural ordering among the categories (e.g. a hat trick producing nothing, a rabbit or stars).
-* Ordinal logistic regression: The response variable can belong to one of three or more categories and there is a natural ordering among the categories (e.g. a hat trick producing a rabbit with white, white and black spotted or black fur).
+
+   * Logistic regression refers to any regression model in which the response variable is categorical.
+   * Binomial logistic regression deals with binary categorical response variables, but other types of logistic regression can deal with more than 2 categories.
+   * Multinomial logistic regression: Deals with response variables with three or more categories with no natural ordering among the categories (e.g. a hat trick producing nothing, a rabbit or stars).
+   * Ordinal logistic regression: The response variable can belong to one of three or more categories and there is a natural ordering among the categories (e.g. a hat trick producing a rabbit with white, white and black spotted or black fur).
 
 </details>
 
@@ -115,8 +115,8 @@ __What is maximum likelihood estimation?__
 <details>
   <summary>Click for answer</summary>
   
-* Logistic regression uses maximum likelihood estimation to fit a model.
-* In maximum likelihood estimation a set of parameters is chosen for a model that maximizes a likelihood function.
+   * Logistic regression uses maximum likelihood estimation to fit a model.
+   * In maximum likelihood estimation a set of parameters is chosen for a model that maximizes a likelihood function.
 
 </details>
 <br/>
@@ -839,171 +839,171 @@ See if this is true for this data by building a model using the tree age predict
   <summary>Click for code</summary>
  
    ```js
-   
-  # CHALLENGE----
-   # CHECKING ASSUMPTIONS
-   ## Assumption 1
-   # Look at data structure
 
-   head(cones) # print first 6 rows of data
-   tail(cones) # print last 6 rows of data
+     # CHALLENGE----
+      # CHECKING ASSUMPTIONS
+      ## Assumption 1
+      # Look at data structure
 
-
-   ## Assumption 2
-   # Make abundance into P/A data
-
-   conesbi <- cones %>% 
-     dplyr::mutate( 
-       Presence = (case_when(  # making new column Presence 
-         Count > '0' ~ 1,       # making each measurement where the Count is over 0 a cone presence
-         Count == '0' ~ 0 )))   # making each measurement where the Count is 0 a cone absence
+      head(cones) # print first 6 rows of data
+      tail(cones) # print last 6 rows of data
 
 
-   ## Assumption 3
-   # Test continuous predictor variable autocorrelation
+      ## Assumption 2
+      # Make abundance into P/A data
 
-   cov(conesbi$Age, conesbi$DBH) # print covariation value (indicates direction not strength)
-   correlations <-  cor(conesbi[,4:5]) # extract continuous predictors for correlation test
-   correlations # print correlation value (closer to 1 or -1 indicates strong +ve or -ve value)
-   corrplot(correlations, method="circle") # create circle plot showing correlation
-
-
-   # Assumption 4
-   # Check outliers of the explanatory variable
-   boxplot(conesbi$Age, main = "Boxplot")
-
-   # Assumption 5
-   # Test linear explanatory~logit(response) relationship
-   boxTidwell(Presence ~ Age, data = conesbi)
-
-   # Assumption 6
-   # Checking data quantity for explanatory variables
-   obs <- length(conesbi$Presence) # find number of observstions
-   summary(conesbi$Presence) # find least frequent outcome and its proportion.
-   abs_lik <- (1 - (mean(conesbi$Presence))) # find likelihood of cone absence
-   max_e_vars <- obs * abs_lik / 10
-   max_e_vars # print the maximum number of explanatory variables allowed in the model
-
-   # MAKING A MODEL
-   # Boxplot to compare distributions of binomial distribution with continuous predictor
-   data_dist <- melt(conesbi[, c("Presence", "Age")], # you can add in all your possible continuous predictor variables to have a look at the data distribution with it
-                     id.vars="Presence") # set your response variable
-
-   ggplot(data_dist, aes(factor(Presence), y = value, fill=factor(Presence))) +
-     geom_boxplot() + 
-     facet_wrap(~variable, scales="free_y") + # make panels of plots for each variable with a y scale that can be used for different units
-     labs(caption = '\n Figure 1: Looking at data distribution of cone presence with tree age\n for conifers in the southern Rocky Mountains, USA ') + 
-     plots_theme() +
-     theme(plot.caption = element_text(size = 30,
-                                       hjust = 0),
-           legend.position = "right",
-           legend.direction = "vertical",
-           legend.title =  element_text(size = 30),
-           legend.text = element_text(size = 30))
-
-   # Binomial distribution with categorical on continuous predictor
-   ggplot(conesbi, aes(x = Age, y = Presence, colour = Spec)) + 
-     geom_point(size = 10, alpha = .2) + # make data points transparent so they can be seen overlayed
-     labs(caption = '\n Figure 2: Looking at data distribution of cone presence with Age\n for Engelmann spruce (PIEN, Picea engelmannii) and subalpine fir (ABLA, Abies lasiocarpa) in\n the southern Rocky Mountains, USA ') + 
-     plots_theme() +
-     theme(plot.caption = element_text(size = 30,
-                                       hjust = 0),
-           legend.position = "right",
-           legend.direction = "vertical",
-           legend.title =  element_text(size = 30),
-           legend.text = element_text(size = 20))
-
-   # Null - make a null model to compare the others to
-
-   null.mod <- glm(Presence ~ 1,  # there are no explanatory variables
-                   data = conesbi,
-                   family = binomial(link = "logit")) # setting the family as a binomial distribution but with a logit link to make it linear
+      conesbi <- cones %>% 
+        dplyr::mutate( 
+          Presence = (case_when(  # making new column Presence 
+            Count > '0' ~ 1,       # making each measurement where the Count is over 0 a cone presence
+            Count == '0' ~ 0 )))   # making each measurement where the Count is 0 a cone absence
 
 
-   #summary(null.mod)  # you can print a summary of your models if you'd like and compare their outcomes
+      ## Assumption 3
+      # Test continuous predictor variable autocorrelation
+
+      cov(conesbi$Age, conesbi$DBH) # print covariation value (indicates direction not strength)
+      correlations <-  cor(conesbi[,4:5]) # extract continuous predictors for correlation test
+      correlations # print correlation value (closer to 1 or -1 indicates strong +ve or -ve value)
+      corrplot(correlations, method="circle") # create circle plot showing correlation
 
 
-   # How does the likelihood of conifer cone presence change with tree age and species?
+      # Assumption 4
+      # Check outliers of the explanatory variable
+      boxplot(conesbi$Age, main = "Boxplot")
 
-   # Make a model with fixed and random effects 
-   age.mod <- glmer(Presence ~ Age + Spec + (1 | Plot / ID) + (1 | Year), 
-                    data = conesbi,
-                    family = binomial(link = "logit"))
-   #summary(dbh.mod) 
+      # Assumption 5
+      # Test linear explanatory~logit(response) relationship
+      boxTidwell(Presence ~ Age, data = conesbi)
 
-   # Make a model with interacting fixed effects 
-   age.mod.int <- glmer(Presence ~ Age * Spec + (1 | Plot / ID) + (1 | Year), 
-                        data = conesbi,
-                        family = binomial(link = "logit"))
-   #summary(dbh.mod.int)
+      # Assumption 6
+      # Checking data quantity for explanatory variables
+      obs <- length(conesbi$Presence) # find number of observstions
+      summary(conesbi$Presence) # find least frequent outcome and its proportion.
+      abs_lik <- (1 - (mean(conesbi$Presence))) # find likelihood of cone absence
+      max_e_vars <- obs * abs_lik / 10
+      max_e_vars # print the maximum number of explanatory variables allowed in the model
 
-   # Compare ur models with AICc galfriend!
-   AICc(null.mod, age.mod, age.mod.int)
-   ## species can't be included as a random effect because only 2 levels but seems like its better included as a fixed effect than not at all
+      # MAKING A MODEL
+      # Boxplot to compare distributions of binomial distribution with continuous predictor
+      data_dist <- melt(conesbi[, c("Presence", "Age")], # you can add in all your possible continuous predictor variables to have a look at the data distribution with it
+                        id.vars="Presence") # set your response variable
+
+      ggplot(data_dist, aes(factor(Presence), y = value, fill=factor(Presence))) +
+        geom_boxplot() + 
+        facet_wrap(~variable, scales="free_y") + # make panels of plots for each variable with a y scale that can be used for different units
+        labs(caption = '\n Figure 1: Looking at data distribution of cone presence with tree age\n for conifers in the southern Rocky Mountains, USA ') + 
+        plots_theme() +
+        theme(plot.caption = element_text(size = 30,
+                                          hjust = 0),
+              legend.position = "right",
+              legend.direction = "vertical",
+              legend.title =  element_text(size = 30),
+              legend.text = element_text(size = 30))
+
+      # Binomial distribution with categorical on continuous predictor
+      ggplot(conesbi, aes(x = Age, y = Presence, colour = Spec)) + 
+        geom_point(size = 10, alpha = .2) + # make data points transparent so they can be seen overlayed
+        labs(caption = '\n Figure 2: Looking at data distribution of cone presence with Age\n for Engelmann spruce (PIEN, Picea engelmannii) and subalpine fir (ABLA, Abies lasiocarpa) in\n the southern Rocky Mountains, USA ') + 
+        plots_theme() +
+        theme(plot.caption = element_text(size = 30,
+                                          hjust = 0),
+              legend.position = "right",
+              legend.direction = "vertical",
+              legend.title =  element_text(size = 30),
+              legend.text = element_text(size = 20))
+
+      # Null - make a null model to compare the others to
+
+      null.mod <- glm(Presence ~ 1,  # there are no explanatory variables
+                      data = conesbi,
+                      family = binomial(link = "logit")) # setting the family as a binomial distribution but with a logit link to make it linear
+
+
+      #summary(null.mod)  # you can print a summary of your models if you'd like and compare their outcomes
+
+
+      # How does the likelihood of conifer cone presence change with tree age and species?
+
+      # Make a model with fixed and random effects 
+      age.mod <- glmer(Presence ~ Age + Spec + (1 | Plot / ID) + (1 | Year), 
+                       data = conesbi,
+                       family = binomial(link = "logit"))
+      #summary(dbh.mod) 
+
+      # Make a model with interacting fixed effects 
+      age.mod.int <- glmer(Presence ~ Age * Spec + (1 | Plot / ID) + (1 | Year), 
+                           data = conesbi,
+                           family = binomial(link = "logit"))
+      #summary(dbh.mod.int)
+
+      # Compare ur models with AICc galfriend!
+      AICc(null.mod, age.mod, age.mod.int)
+      ## species can't be included as a random effect because only 2 levels but seems like its better included as a fixed effect than not at all
 
 
 
-   # TESTING
-   # Check outliers with Cook's distance plot
-   model <- glm(Presence ~ Age + Spec, family = "binomial", data = conesbi)
-   CookD(model) # this might pop up in another window
+      # TESTING
+      # Check outliers with Cook's distance plot
+      model <- glm(Presence ~ Age + Spec, family = "binomial", data = conesbi)
+      CookD(model) # this might pop up in another window
 
-   conesbi[796,]
-   conesbi[817,]
-   conesbi[1082,]
+      conesbi[796,]
+      conesbi[817,]
+      conesbi[1082,]
 
-   # Test and train then model
+      # Test and train then model
 
-   # Make random sample reproducible (so you can come back to this and get the same set of numbers in the training and testing dataset)
-   set.seed(2) # you can use any integer here
+      # Make random sample reproducible (so you can come back to this and get the same set of numbers in the training and testing dataset)
+      set.seed(2) # you can use any integer here
 
-   # Use 70% of dataset as training set and remaining 30% as testing set
-   sample <- sample(c(TRUE, FALSE), nrow(conesbi), replace=TRUE, prob=c(0.7,0.3)) # randomly sample 70%
-   train <- conesbi[sample, ] # train dataset including 70% of the data
-   test <- conesbi[!sample, ] # make the test dataset with the remaining 30%
+      # Use 70% of dataset as training set and remaining 30% as testing set
+      sample <- sample(c(TRUE, FALSE), nrow(conesbi), replace=TRUE, prob=c(0.7,0.3)) # randomly sample 70%
+      train <- conesbi[sample, ] # train dataset including 70% of the data
+      test <- conesbi[!sample, ] # make the test dataset with the remaining 30%
 
-   # PRESENT RESULTS
-   # Look at the model outcomes
-   summary(age.mod)
-   # Print a table for reporting values
-   tab_model(age.mod)
-   # Make fixed effects plots showing the odds ratio
-   plot_model(age.mod,
-              type = "est", 
-              show.values = TRUE)
+      # PRESENT RESULTS
+      # Look at the model outcomes
+      summary(age.mod)
+      # Print a table for reporting values
+      tab_model(age.mod)
+      # Make fixed effects plots showing the odds ratio
+      plot_model(age.mod,
+                 type = "est", 
+                 show.values = TRUE)
 
 
-   # Now we know the models are pretty good we can plot their prediction
+      # Now we know the models are pretty good we can plot their prediction
 
-   # Extract predictions
-   predicted_age_sp <- plot_model(age.mod, type = "pred", terms = c("Age [all]", "Spec"))$data # extract model predictions in response to DBH and species
+      # Extract predictions
+      predicted_age_sp <- plot_model(age.mod, type = "pred", terms = c("Age [all]", "Spec"))$data # extract model predictions in response to DBH and species
 
-   # Make your marginal effects plots
-   predicted_age_sp_plot <- ggplot(data = predicted_age_sp) + 
-     geom_line(aes(x = x, # add a line showing the model's prediction
-                   y = predicted, 
-                   col = group_col), # colour the lines for each species
-               linewidth = 1) + 
-     geom_ribbon(aes(x = x, # add a line to show 95% confidence intervals
-                     ymin = conf.low,
-                     ymax = conf.high,
-                     fill = group_col), 
-                 alpha = 0.3) + 
-     labs(x = 'Tree Age (years)', # personalise labels
-          y = 'Probability of cone presence',
-          caption = '\n Figure 2: Probability of cone presence predicted from tree age for two conifer species\n in the southern Rocky Mountains, USA (+- 95% CI). ',
-     ) + 
-     plots_theme() +
-     scale_colour_manual(name = "Conifer species", labels = c("Subalpine fir", "Engleman spruce"), values = c("#E69F00", "#CC79A7")) +  # personalise colours and legend names
-     scale_fill_manual(name = "Conifer species", labels = c("Subalpine fir", "Engleman spruce"), values = c("#E69F00", "#CC79A7")) +
-     theme(plot.caption = element_text(size = 50, # for come reason this caption and legend stuff just won't come through from the function we made so you have to reiterate it here
-                                       hjust = 0),
-           legend.position = "right",
-           legend.direction = "vertical",
-           legend.title =  element_text(size = 40),  # alter size and location of legend to suit your plot
-           legend.text = element_text(size = 35))
+      # Make your marginal effects plots
+      predicted_age_sp_plot <- ggplot(data = predicted_age_sp) + 
+        geom_line(aes(x = x, # add a line showing the model's prediction
+                      y = predicted, 
+                      col = group_col), # colour the lines for each species
+                  linewidth = 1) + 
+        geom_ribbon(aes(x = x, # add a line to show 95% confidence intervals
+                        ymin = conf.low,
+                        ymax = conf.high,
+                        fill = group_col), 
+                    alpha = 0.3) + 
+        labs(x = 'Tree Age (years)', # personalise labels
+             y = 'Probability of cone presence',
+             caption = '\n Figure 2: Probability of cone presence predicted from tree age for two conifer species\n in the southern Rocky Mountains, USA (+- 95% CI). ',
+        ) + 
+        plots_theme() +
+        scale_colour_manual(name = "Conifer species", labels = c("Subalpine fir", "Engleman spruce"), values = c("#E69F00", "#CC79A7")) +  # personalise colours and legend names
+        scale_fill_manual(name = "Conifer species", labels = c("Subalpine fir", "Engleman spruce"), values = c("#E69F00", "#CC79A7")) +
+        theme(plot.caption = element_text(size = 50, # for come reason this caption and legend stuff just won't come through from the function we made so you have to reiterate it here
+                                          hjust = 0),
+              legend.position = "right",
+              legend.direction = "vertical",
+              legend.title =  element_text(size = 40),  # alter size and location of legend to suit your plot
+              legend.text = element_text(size = 35))
 
-  ```
+     ```
 </details>
 
 
