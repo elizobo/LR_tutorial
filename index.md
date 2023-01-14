@@ -70,7 +70,6 @@ __Why can't we use linear regression?__
 </details>
 
 <br/>
-<br/>
 
 __What do you mean by logistic?__ 
 <details>
@@ -83,7 +82,6 @@ __What do you mean by logistic?__
 </details>
 
 <br/>
-<br/>
 
 __Um logit link function??__ 
 <details>
@@ -94,7 +92,6 @@ __Um logit link function??__
 
 </details>
 
-<br/>
 <br/>
 
 __Why binomial?__ 
@@ -109,7 +106,6 @@ __Why binomial?__
 </details>
 
 <br/>
-<br/>
 
 __What is maximum likelihood estimation?__ 
 <details>
@@ -120,13 +116,10 @@ __What is maximum likelihood estimation?__
 
 </details>
 <br/>
-<br/>
 
 If you want to go into more of the maths have a read <a href="[https://www.flickr.com/photos/codiferous/7978232221/in/photostream/](https://medium.com/deep-math-machine-learning-ai/chapter-2-0-logistic-regression-with-math-e9cbb3ec6077)" target="_blank">here</a>), otherwise this tutorial can give you all you need to get your report underway from raw data to results.
 
 <br/>
-<br/>
-
 
 ### Data: Conifer cones
 
@@ -136,7 +129,7 @@ For this tutorial we'll be looking into reproductive maturity of conifers. There
 
 <p align="center">
   <img src="{{ site.baseurl }}/images/engelman_cone2.png" alt="drawing" width="30%"/>&nbsp;&nbsp;&nbsp;&nbsp;
-  &nbsp;&nbsp;&nbsp;&nbsp;<img src="{{ site.baseurl }}/images/subalpfir_cone.png" alt="drawing" width="35%" > 
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="{{ site.baseurl }}/images/subalpfir_cone.png" alt="drawing" width="35%" > 
 </p>
 <p align="center">
   Engleman spruce seed cones (photo credit: <a href="https://https://www.conifers.org/pi/Picea_engelmannii.php" target="_blank"> C. Earle </a>).&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Subalpine fir seed cones (photo credit: <a href="https://www.flickr.com/photos/76416226@N03/6881892262" target="_blank"> B. Leystra </a>). 
@@ -353,6 +346,7 @@ If the p-value (Pr(>[z]) is significant (below 0.05, also indicated by asterisks
 </p>
 <br/>
 <br/>
+
 __Assumption 6. There is a sufficiently large sample size__
 
 The model must contain a minimum of 10 observations of the least frequent outcome for each explanatory variable.
@@ -382,11 +376,6 @@ max_e_vars # print the maximum number of explanatory variables allowed in the mo
 <br/>
 __Great! With all these assumptions met we know our data is suitable for a logistic regression and we can get along with building our model.__
 
-<pre>
-
-
-
-</pre>
 
 <a name="section2"></a>
 
@@ -394,13 +383,10 @@ __Great! With all these assumptions met we know our data is suitable for a logis
 
 Before building your model, remind yourself of your research question :
 
-<p align="center">
-   __How does tree age and species influence conifer reproductive maturity?__
-</p>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;__How does tree age and species influence conifer reproductive maturity?__
 
 Make sure you know your response variable, explanatory variable(s) and random effects and their names within the model.
-
-<p align="center">
+   
 | __Model parameter type__  | __Our model parameter__                                          | __Name in Rscript__ |
 |---------------------------|------------------------------------------------------------------|---------------------|
 | __Response variable__     | - conifer reproductive maturity, indicated by seed cone presence | - Presence          |
@@ -409,7 +395,9 @@ Make sure you know your response variable, explanatory variable(s) and random ef
 | __Random effects__        | - individual tree                                                | - ID                |
 |                           | - plot of trees                                                  | - Plot              |
 |                           | - measurement year                                               | - Year              |
-</p>
+
+
+
 
 #### __Check out the data__
 
