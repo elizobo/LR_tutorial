@@ -2,7 +2,7 @@
 title: "Logistic Regression Tutorial : working with binomial data"
 author: "Elizabeth Stroud"
 date: '2022-12-20'
-output: html_document
+output: md_document
 ---
 
 \<center\>
