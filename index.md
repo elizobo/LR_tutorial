@@ -53,11 +53,7 @@ __All the B-word Terminology__
 
 
 
-Binomial logistic regression is a type of Generalised Linear Model (GLM). You can always give yourself a refresher on GLMs with this Coding Club tutorial. If you have time and are interested below are some questions which although you aren't asking yourself, may make the whole binomial logistic regression concept a bit clearer for the tutorial ahead. If you aren't curious about the ins and outs, trot blindly past these questions on to the practical stuff. 
-
-<p align="center">
-   <img src="{{ site.baseurl }}/images/logit.png" alt="drawing" width="80%">
-</p>
+Binomial logistic regression is a type of Generalised Linear Model (GLM). You can always give yourself a refresher on model building with <a href="(https://ourcodingclub.github.io/tutorials/model-design/)" target="_blank">this Coding Club tutorial</a>. If you have time and are interested below are some questions which although you aren't asking yourself, may make the whole binomial logistic regression concept a bit clearer for the tutorial ahead. If you aren't curious about the ins and outs, trot blindly past these questions on to the practical stuff. 
 
 __Why can't we use linear regression?__ 
 <details>
@@ -65,7 +61,7 @@ __Why can't we use linear regression?__
   
    * Well the assumptions of linear regression that a) residuals are normally distributed and b) the response variable is a continuous and unbounded ratio or interval value are both violated with this categorical binary response variable. 
    * If we used our binary outcomes as the response variable (Y-axis on a graph) and fit a straight line, this doesn't represent the relationship very well. 
-   * Coding Club has tutorials on linear regression and GLMs if you want to know more about them. 
+   * Coding Club has <a href="(https://ourcodingclub.github.io/tutorials/mixed-models/)" target="_blank">tutorials on linear regression</a> if you want to know more about them. 
 
 </details>
 
@@ -117,7 +113,14 @@ __What is maximum likelihood estimation?__
 </details>
 <br/>
 
-If you want to go into more of the maths have a read <a href="[https://www.flickr.com/photos/codiferous/7978232221/in/photostream/](https://medium.com/deep-math-machine-learning-ai/chapter-2-0-logistic-regression-with-math-e9cbb3ec6077)" target="_blank">here</a>), otherwise this tutorial can give you all you need to get your report underway from raw data to results.
+<p align="center">
+   <img src="{{ site.baseurl }}/images/logit.png" alt="drawing" width="80%">
+</p>
+<p align="center">
+  Working with binary data: a) the inability to represent a binomial regression linearly (left), b) the ability to linearly represent it if using log-odds of presence as the response (centre) and c) using a logit link function to convert the response to probability, forming a sigmoidal relationship. 
+</p>
+
+If you want to go into more of the maths have a read <a href="[https://www.flickr.com/photos/codiferous/7978232221/in/photostream/](https://medium.com/deep-math-machine-learning-ai/chapter-2-0-logistic-regression-with-math-e9cbb3ec6077)" target="_blank">here</a>, otherwise this tutorial can give you all you need to get your report underway from raw data to results.
 
 <br/>
 
