@@ -55,14 +55,14 @@ __All the B-word Terminology__
 
 Binomial logistic regression is a type of Generalised Linear Model (GLM). You can always give yourself a refresher on model building with <a href="(https://ourcodingclub.github.io/tutorials/model-design/)" target="_blank">this Coding Club tutorial</a>. If you have time and are interested below are some questions which although you aren't asking yourself, may make the whole binomial logistic regression concept a bit clearer for the tutorial ahead. If you aren't curious about the ins and outs, trot blindly past these questions on to the practical stuff. 
 
-{% details Click to expand %}
+<details>
+  <summary>Your header here! (Click to expand)</summary>
+  Your content here...</br>
+  (markup only where supported)</br>
+  more content here...</br>
+</details>
 
-	~~~ python
-	Code here
-	~~~
-{% enddetails %}
-
-- <details>
+<details>
 	<summary>Why can't we use linear regression?</summary>
 
 	<pre>
@@ -73,7 +73,7 @@ Binomial logistic regression is a type of Generalised Linear Model (GLM). You ca
 
 </details>
 
-- <details>
+<details>
 	<summary>Um logit link function??</summary>
 
 	<pre>
@@ -83,7 +83,7 @@ Binomial logistic regression is a type of Generalised Linear Model (GLM). You ca
 
 </details>
 
-- <details>
+<details>
 	<summary>Why binomial?</summary>
 
 	<pre>
@@ -95,7 +95,7 @@ Binomial logistic regression is a type of Generalised Linear Model (GLM). You ca
 
 </details>
 	
-- <details>
+<details>
 	<summary>What is maximum likelihood estimation?</summary>
 	
 	<pre>
