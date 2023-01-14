@@ -32,11 +32,11 @@ __All the B-word Terminology__
 
 -   __Boolean__ : Your data is Boolean if you have combination outcomes you can define as binary data with values of true and false. You pretty much only have to think of data in this way if you're doing Boolean Algebra - building a deductive logical system (not part of this tutorial, phew).
 <p align="center">
-   <img src="{{ site.baseurl }}/images/bernoulli1.png" alt="drawing" width="50%"/>&nbsp;&nbsp;&nbsp;&nbsp;
+   <img src="{{ site.baseurl }}/images/bernoulli1.png" alt="drawing" width="35%"/>&nbsp;&nbsp;&nbsp;&nbsp;
    &nbsp;&nbsp;&nbsp;&nbsp;<img src="{{ site.baseurl }}/images/bernouli2.png" alt="drawing" width="50%">
 </p>
 
--   __Bernoulli__ : A Bernoulli trial/experiment is a single binary experiment. The outcome of this has Bernoulli distribution - the observed response of '0' or '1'.
+-   __Bernoulli__ : A Bernoulli trial/experiment is a single binary experiment. The outcome of this has Bernoulli distribution - the observed response of '0' or '1' from a single trial.
 <p align="center">
    <img src="{{ site.baseurl }}/images/beta.png" alt="drawing" width="30%">
 </p>
@@ -46,14 +46,14 @@ __All the B-word Terminology__
    <img src="{{ site.baseurl }}/images/actualbeta.png" alt="drawing" width="60%">
 </p>
 
--   __Beta__ : A beta distribution also describes the outcome of several Bernoulli trials but as a probability of having '1' as an outcome, given the number of '1' and '0' outcomes from X number of trials. As the number of Bernoulli trials increases the beta distribution will change from a straight line to an increasingly arched bell shape.
+-   __Beta__ : A beta distribution also describes the outcome of several Bernoulli trials but as a probability of having '1' as an outcome, given the number of '1' and '0' outcomes from X number of trials. As the number of Bernoulli trials increases the beta distribution will form an increasingly arched bell shape.
 <p align="center">
    <img src="{{ site.baseurl }}/images/PDF-graph.png" alt="drawing" width="50%">
 </p>
 
 
 
-Binomial logistic regression is a type of Generalised Linear Model. If you have time and are interested here are some questions you aren't asking yourself but may make this whole concept clearer. If you aren't curious about the ins and outs, trot blindly on to the practical stuff. 
+Binomial logistic regression is a type of Generalised Linear Model (GLM). You can always give yourself a refresher on GLMs with this Coding Club tutorial. If you have time and are interested below are some questions which although you aren't asking yourself, may make the whole binomial logistic regression concept a bit clearer for the tutorial ahead. If you aren't curious about the ins and outs, trot blindly past these questions on to the practical stuff. 
 
 <p align="center">
    <img src="{{ site.baseurl }}/images/logit.png" alt="drawing" width="80%">
@@ -69,7 +69,8 @@ __Why can't we use linear regression?__
    
 </details>
 
-
+<br/>
+<br/>
 
 __What do you mean by logistic?__ 
 <details>
@@ -81,6 +82,9 @@ __What do you mean by logistic?__
    
 </details>
 
+<br/>
+<br/>
+
 __Um logit link function??__ 
 <details>
   <summary>Click for answer</summary>
@@ -89,6 +93,9 @@ __Um logit link function??__
 * The logit function is the natural log of the odds that the response will equal 1. 
    
 </details>
+
+<br/>
+<br/>
 
 __Why binomial?__ 
 <details>
@@ -101,6 +108,9 @@ __Why binomial?__
 
 </details>
 
+<br/>
+<br/>
+
 __What is maximum likelihood estimation?__ 
 <details>
   <summary>Click for answer</summary>
@@ -109,18 +119,24 @@ __What is maximum likelihood estimation?__
 * In maximum likelihood estimation a set of parameters is chosen for a model that maximizes a likelihood function.
 
 </details>
+<br/>
+<br/>
 
-If you want to go into more of the maths have a read \<a href="<https://medium.com/deep-math-machine-learning-ai/chapter-2-0-logistic-regression-with-math-e9cbb3ec6077>["](https://portal.edirepository.org/nis/home.jsp%22) target="\_blank"\> here</a>, otherwise this tutorial can give you all you need to get your report underway from raw data to results.
+If you want to go into more of the maths have a read <a href="[https://www.flickr.com/photos/codiferous/7978232221/in/photostream/](https://medium.com/deep-math-machine-learning-ai/chapter-2-0-logistic-regression-with-math-e9cbb3ec6077)" target="_blank">here</a>), otherwise this tutorial can give you all you need to get your report underway from raw data to results.
 
-You can get all of the resources for this tutorial from <a href="https://github.com/elizobo/LR_tutorial" target="_blank">this GitHub repository</a>. Clone and download the repo as a zip file, then unzip it.
+<br/>
+<br/>
+
 
 ### Data: Conifer cones
+
+You can get all of the resources for this tutorial from <a href="https://github.com/elizobo/LR_tutorial" target="_blank">this GitHub repository</a>. Clone and download the repo as a zip file, then unzip it.
 
 For this tutorial we'll be looking into reproductive maturity of conifers. There is high variability in seed cone production among many northern temperate conifers, and we'll make a model to find reasons for this variation.
 
 <p align="center">
-  <img src="{{ site.baseurl }}/images/engelman_cone2.png" alt="drawing" width="25%"/>&nbsp;&nbsp;&nbsp;&nbsp;
-  &nbsp;&nbsp;&nbsp;&nbsp;<img src="{{ site.baseurl }}/images/subalpfir_cone.png" alt="drawing" width="25%" > 
+  <img src="{{ site.baseurl }}/images/engelman_cone2.png" alt="drawing" width="30%"/>&nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;<img src="{{ site.baseurl }}/images/subalpfir_cone.png" alt="drawing" width="35%" > 
 </p>
 <p align="center">
   Engleman spruce seed cones (photo credit: <a href="https://https://www.conifers.org/pi/Picea_engelmannii.php" target="_blank"> C. Earle </a>).&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Subalpine fir seed cones (photo credit: <a href="https://www.flickr.com/photos/76416226@N03/6881892262" target="_blank"> B. Leystra </a>). 
@@ -224,7 +240,6 @@ What effects conifer reproductive maturity? If cone presence is an indicator of 
 
 Before making a logistic regression model you have to check your data is suited for it. There are 6 assumptions we'll work through.
 
-
 __Assumption 1. Observations are independent__
 
 Each data point used to construct the model must be equally related. To check this we will print the first and last 6 rows of the data and check any metadata we have available.
@@ -247,8 +262,8 @@ To account for these links and avoid pseudo replication we will have to account 
 <p align="center">
    ASSUMPTION MET: If we take these variables into account as random effects, we can assume datapoints are independent.
 </p>
-
-
+<br/>
+<br/>
 __Assumption 2. The response variable is binomial__
 
 Currently we only have *cone abundance* data. We will make a new response variable column, *cone presence*. Presence will be indicated by 1 and absence by 0.
@@ -262,9 +277,11 @@ conesbi <- cones %>%
                  Count > '0' ~ 1,       # making each measurement where the Count is over 0 a cone presence
                  Count == '0' ~ 0 )))   # making each measurement where the Count is 0 a cone absence
 ```
-
-ASSUMPTION MET: We have a binomial response variable.
-
+<p align="center">
+   ASSUMPTION MET: We have a binomial response variable.
+</p>
+<br/>
+<br/>
 
 __Assumption 3. Predictor variables are independent with no multicolinearity__
 
@@ -292,8 +309,8 @@ There is a very strong positive relationship between tree age and DBH. Including
 <p align="center">
    ASSUMPTION MET: We will use DBH as the only fixed effect in this model so that it is an independent explanatory variable.
 </p>
-
-
+<br/>
+<br/>
 __Assumption 4. There are no extreme outliers in the explanatory variable.__
 
 Data points that are extreme outliers have a disproportionate effect on the data trend and may affect the prediction probability of the datapoints by the model. Although the sigmoid function in logistic regression models tapers outliers so they aren't as influential as they would be in other model types, extreme outliers may still lower the model performance so should be identified and removed ONLY IF there is any valid reason for exclusion (e.g. it turned out the tree was actually dead).
@@ -314,7 +331,8 @@ boxplot(conesbi$DBH, main = "Boxplot")
 </p>
 
 We can see there is a general under representation of older trees which may lead to outliers of our model. We will keep this in mind and check this assumption again using cooks distance test once we've built our model.
-
+<br/>
+<br/>
 
 __Assumption 5. There is a linear relationship between the explanatory variable and the logit of the response variable__
 
@@ -328,12 +346,13 @@ We will test that the explanatory and response have this sigmoid this relationsh
 boxTidwell(Presence ~ DBH, data = conesbi)
 ```
 
-If the p-value (Pr(>|z|) is significant (below 0.05, also indicated by asterisks) the data fits the relationship; this test shows the correlation between presence and age will fit the sigmoid function of logistic regression.
+If the p-value (Pr(>[z]) is significant (below 0.05, also indicated by asterisks) the data fits the relationship; this test shows the correlation between presence and age will fit the sigmoid function of logistic regression.
 
 <p align="center">
   ASSUMPTION MET: There is a linear relationship between the explanatory and logit of the response.
 </p>
-
+<br/>
+<br/>
 __Assumption 6. There is a sufficiently large sample size__
 
 The model must contain a minimum of 10 observations of the least frequent outcome for each explanatory variable.
@@ -359,8 +378,9 @@ max_e_vars # print the maximum number of explanatory variables allowed in the mo
 <p align="center">
   ASSUMPTION MET: We will include less than 62 explanatory variables in the model.
 </p>
-
-Great! With all these assumptions met we know our data is suitable for a logistic regression and we can get along with building our model.
+<br/>
+<br/>
+__Great! With all these assumptions met we know our data is suitable for a logistic regression and we can get along with building our model.__
 
 <pre>
 
@@ -492,7 +512,10 @@ dbh.mod.int <- glmer(Presence ~ DBH * Spec + (1 | Plot / ID) + (1 | Year),
 #summary(dbh.mod.int)
 ```
 
-And finally, compare the models you've made. We'll extract the corrected Archaic Information Criterion value, AICc, from each model. This number indicates the model prediction error, so the lower the value the better the model. AICc puts a greater penalty on the number of parameters used in a model than AIC and is particularly good for smaller datasets. However, even with larger datasets like this the AICc value ends up converging with AIC so its generally best just to use AICc. You can only compare AICc values on models using the same dataset and predicting the same response variable.
+And finally, compare the models you've made. We'll extract the corrected Archaic Information Criterion value, AICc, from each model. 
+-  The AICc is a number that indicates the model prediction error, so the lower the value the better the model. 
+-  AICc puts a greater penalty on the number of parameters used in a model than AIC and is particularly good for smaller datasets. However, even with larger datasets like this, the AICc value ends up converging with AIC so it's generally best just to use AICc.
+-  You can only compare AICc values on models using the same dataset and predicting the same response variable.
 
 ```r
 # Compare ur models with AICc galfriend!
@@ -571,7 +594,7 @@ Extract predictions made by the model for explanatory variable values from the t
 pdata <- predict(train_mod, newdata = test, type = "response")
 ```
 
-Find the optimum cutoff probability of the model - the point on the explanatory variable at which it is more likely the binary response will be 1 than 0.
+We can then compare the models predictions for the test dataset to the real observations for the test data by building a confusion matrix.
 
 ```r
 # Compute a confusion matrix comparing the predicted model outcomes to the real outcomes for the test dataset
@@ -586,6 +609,7 @@ confusionMatrix(data = as.factor(as.numeric(pdata>0.5)), reference = as.factor(t
 
 This shows the number of unmatching outcomes are low, showing the model is pretty strong. We can also quantify this by calculating the misclassification rate.
 
+-   optimal : optimum cutoff probability of the model - the point on the explanatory variable at which it is more likely the binary response will be 1 than 0.
 -   misclassification error rate : the proportion of observations (both positive and negative) that were not predicted correctly by the model
 
 ```r
@@ -613,7 +637,9 @@ This prints 0.1113638, meaning a tree with these attributes would have 11% likel
 
 <a name="section4"></a>
 
-## 4.  Presenting and reporting model results
+## 4.  Reporting and presenting model results
+
+#### __Reporting results__
 
 Now we know our model is pretty good we can draw any results from it. First we'll look at the model summary.
 
@@ -640,7 +666,7 @@ Everything is annotated here but all you'll probably use is the numbers in the s
 
 -   **P-value** : A significance value taking into account the OR and the CI. This allows you to test your hypothesis .
 
-You can print a table with these statistics using the code below and simply refer to it in your results statements if your short on word space. It can also be worth including an odds ratio diagram as the reader can quickly grasp if and how the fixed effects can predict the response.
+You can print a table with these statistics using the code below and simply refer to it in your results statements if you're short on word space in your report. It can also be worth including an odds ratio diagram as the reader can quickly grasp if and how the fixed effects can predict the response.
 
 ```r
 # Print a table for reporting values
@@ -652,7 +678,7 @@ plot_model(dbh.mod,
 ```
 
 <p align="center">
-   <img src="{{ site.baseurl }}/images/CI_sumtab.png" alt="drawing" width="70%">
+   <img src="{{ site.baseurl }}/images/CI_sumtab.png" alt="drawing" width="50%">
 </p>
 <p align="center">
   Summary reporting statistics (tab_model output).
@@ -670,9 +696,12 @@ We can then report :
 -   A 1cm increase in tree DBH increases likelihood of cone presence by 16% (95% CI [.13, .19]; Figure 1). We can conclude tree size is a strong predictor of reproductive maturity.
 -   Engleman spruce are 157% more likely to have seed cone presence than Subalpine fir (95% CI [.72, 2.84]; Figure 2).
 
+(The Figures in the brackets refering to graphs that illustrate these results...)
 <pre>
 
 </pre>
+
+#### __Presenting predictions__
 
 We can now present our model predictions by plotting predicted values (marginal effects) for specific model terms. 
 -  A marginal effect is the slope of the prediction function, measured for each variable in the model for each unit in the data. 
@@ -772,7 +801,7 @@ ggsave(filename = 'images/p_cone_dbh_sp.png',
 
 ## The End
 
-This is the end of the tutorial. taadaa now you can have a walk outside, cup of tea and an unholy number of oreos then go get started on that report. Good stuff.
+This is the end of the tutorial. Taadaa the fog has lifted! Now you can have a walk outside, cup of tea and an unholy number of oreos then go get started on that report. Good stuff.
 
 <p align="center">
    <img src="{{ site.baseurl }}/images/Spruce-habitat.png" alt="drawing" width="75%">
