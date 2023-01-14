@@ -89,12 +89,12 @@ __What do you mean by logistic?__
 <details>
   <summary>Click for answer</summary>
   
-   <p>
+   <pre>
    
    * By classifying the binary variable outcomes as 0 and 1, the model predicts the log-odds that each given observation (X-axis value) will take on a value of 1. Odds is the success:failure ratio, and the log-odds is the natural logarithm of this. Using these log-odds as the response (X-axis) provides a linear relationship for a GLM to be built. 
    * A logit link (logistic) function is used to convert the log-odds to a probability, which is more intuitive for us. Using probability as the response variable (Y-axis) instead of using the categorical binary forms a sigmoidal S-shape relationship, which we understand but a GLM would not.
    
-   </p>
+   </pre>
 
 </details>
 
