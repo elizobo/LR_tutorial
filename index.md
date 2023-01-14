@@ -60,11 +60,13 @@ Binomial logistic regression is a type of Generalised Linear Model (GLM). You ca
 	<summary>Why can't we use linear regression?</summary>
 
 <p>
+	
 Well the assumptions of linear regression that a) residuals are normally distributed and b) the response variable is a continuous and unbounded ratio or interval value are both violated with this categorical binary response variable.
 
 If we used our binary outcomes as the response variable (Y-axis on a graph) and fit a straight line, this doesn't represent the relationship very well. 
 
 Coding Club has <a href="(https://ourcodingclub.github.io/tutorials/mixed-models/)" target="_blank">tutorials on linear regression</a> if you want to know more about them. 
+	
 </p>
 
 
@@ -74,10 +76,11 @@ Coding Club has <a href="(https://ourcodingclub.github.io/tutorials/mixed-models
 	<summary>Um logit link function??</summary>
 
 <pre>
-<p>
-- A link function is function of the mean of the response variable (Y-axis) that we use as the response (Y-axis) instead of response variable itself. So we use the logit of the response variable (Y-axis) instead of just the response variable. 
-- The logit function is the natural log of the odds that the response will equal 1. 
-</p>
+
+A link function is function of the mean of the response variable (Y-axis) that we use as the response (Y-axis) instead of response variable itself. So we use the logit of the response variable (Y-axis) instead of just the response variable. 
+
+The logit function is the natural log of the odds that the response will equal 1. 
+
 </pre>
 
 </details>
@@ -86,10 +89,13 @@ Coding Club has <a href="(https://ourcodingclub.github.io/tutorials/mixed-models
 	<summary>Why binomial?</summary>
 
 	<pre>
-	     - Logistic regression refers to any regression model in which the response variable is categorical.   
-	     - Binomial logistic regression deals with binary categorical response variables, but other types of logistic regression can deal with more than 2 categories.   
-	     - Multinomial logistic regression: Deals with response variables with three or more categories with no natural ordering among the categories (e.g. a hat trick producing nothing, a rabbit or stars).   
-	     - Ordinal logistic regression: The response variable can belong to one of three or more categories and there is a natural ordering among the categories (e.g. a hat trick producing a rabbit with white, white and black spotted or black fur).
+Logistic regression refers to any regression model in which the response variable is categorical.   
+
+Binomial logistic regression deals with binary categorical response variables, but other types of logistic regression can deal with more than 2 categories.   
+
+Multinomial logistic regression: Deals with response variables with three or more categories with no natural ordering among the categories (e.g. a hat trick producing nothing, a rabbit or stars).   
+
+Ordinal logistic regression: The response variable can belong to one of three or more categories and there is a natural ordering among the categories (e.g. a hat trick producing a rabbit with white, white and black spotted or black fur).
 	</pre>
 
 </details>
@@ -97,10 +103,11 @@ Coding Club has <a href="(https://ourcodingclub.github.io/tutorials/mixed-models
 <details>
 	<summary>What is maximum likelihood estimation?</summary>
 	
-	<pre>
-	     - Logistic regression uses maximum likelihood estimation to fit a model.  
-	     - In maximum likelihood estimation a set of parameters is chosen for a model that maximizes a likelihood function.
-	</pre>
+<pre>
+Logistic regression uses maximum likelihood estimation to fit a model.  
+
+In maximum likelihood estimation a set of parameters is chosen for a model that maximizes a likelihood function.
+</pre>
 
 </details>
 
