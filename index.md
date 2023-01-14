@@ -83,11 +83,9 @@ Binomial logistic regression is a type of Generalised Linear Model (GLM). You ca
 
 </details>
 
-<br/>
 
-__What do you mean by logistic?__ 
 <details>
-  <summary>Click for answer</summary>
+  <summary>__What do you mean by logistic?__</summary>
   
    <p>
    
@@ -99,11 +97,9 @@ __What do you mean by logistic?__
 
 </details>
 
-<br/>
 
-__Um logit link function??__ 
 <details>
-  <summary>Click for answer</summary>
+  <summary>__Um logit link function??__</summary>
    
    <p>
   
@@ -115,11 +111,9 @@ __Um logit link function??__
 
 </details>
 
-<br/>
 
-__Why binomial?__ 
 <details>
-  <summary>Click for answer</summary>
+  <summary>__Why binomial?__ </summary>
    
    <p>
 
@@ -135,11 +129,9 @@ __Why binomial?__
 
 </details>
 
-<br/>
 
-__What is maximum likelihood estimation?__ 
 <details>
-  <summary>Click for answer</summary>
+  <summary>__What is maximum likelihood estimation?__</summary>
    
    <p>
   
