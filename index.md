@@ -55,31 +55,29 @@ __All the B-word Terminology__
 
 Binomial logistic regression is a type of Generalised Linear Model (GLM). You can always give yourself a refresher on model building with <a href="(https://ourcodingclub.github.io/tutorials/model-design/)" target="_blank">this Coding Club tutorial</a>. If you have time and are interested below are some questions which although you aren't asking yourself, may make the whole binomial logistic regression concept a bit clearer for the tutorial ahead. If you aren't curious about the ins and outs, trot blindly past these questions on to the practical stuff. 
 
-<details>
-  <summary>Your header here! (Click to expand)</summary>
-  Your content here...</br>
-  (markup only where supported)</br>
-  more content here...</br>
-</details>
 
 <details>
 	<summary>Why can't we use linear regression?</summary>
 
-	<pre>
-	     - Well the assumptions of linear regression that a) residuals are normally distributed and b) the response variable is a continuous and unbounded ratio or interval value are both violated with this categorical binary response variable.
-	     - If we used our binary outcomes as the response variable (Y-axis on a graph) and fit a straight line, this doesn't represent the relationship very well. 
-	     - Coding Club has <a href="(https://ourcodingclub.github.io/tutorials/mixed-models/)" target="_blank">tutorials on linear regression</a> if you want to know more about them. 
-	</pre>
+<pre>
+<p>
+- Well the assumptions of linear regression that a) residuals are normally distributed and b) the response variable is a continuous and unbounded ratio or interval value are both violated with this categorical binary response variable.
+- If we used our binary outcomes as the response variable (Y-axis on a graph) and fit a straight line, this doesn't represent the relationship very well. 
+- Coding Club has <a href="(https://ourcodingclub.github.io/tutorials/mixed-models/)" target="_blank">tutorials on linear regression</a> if you want to know more about them. 
+</p>
+</pre>
 
 </details>
 
 <details>
 	<summary>Um logit link function??</summary>
 
-	<pre>
-	     - A link function is function of the mean of the response variable (Y-axis) that we use as the response (Y-axis) instead of response variable itself. So we use the logit of the response variable (Y-axis) instead of just the response variable. 
-	     - The logit function is the natural log of the odds that the response will equal 1. 
-	</pre>
+<pre>
+<p>
+- A link function is function of the mean of the response variable (Y-axis) that we use as the response (Y-axis) instead of response variable itself. So we use the logit of the response variable (Y-axis) instead of just the response variable. 
+- The logit function is the natural log of the odds that the response will equal 1. 
+</p>
+</pre>
 
 </details>
 
