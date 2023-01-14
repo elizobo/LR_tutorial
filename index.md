@@ -59,8 +59,8 @@ __Why can't we use linear regression?__
 
 <details><summary>CLICK ME</summary>
 <p>
-	-	yes, even hidden code blocks!
-	-	yoyo
+	* yes, even hidden code blocks!
+	* yoyo
 
 </p>
 </details>
