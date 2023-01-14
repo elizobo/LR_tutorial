@@ -58,11 +58,14 @@ Binomial logistic regression is a type of Generalised Linear Model (GLM). You ca
 __Why can't we use linear regression?__ 
 
 <details><summary>CLICK ME</summary>
-<p>
-	* yes, even hidden code blocks!
-	* yoyo
+	
+	<p>
+		
+		* yes, even hidden code blocks!
+		* yoyo
 
-</p>
+	</p>
+	
 </details>
 
 
