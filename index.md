@@ -53,7 +53,7 @@ __All the B-word Terminology__
 
 
 
-Binomial logistic regression is a type of Generalised Linear Model (GLM). You can always give yourself a refresher on model building with <a href="(https://ourcodingclub.github.io/tutorials/model-design/)" target="_blank">this Coding Club tutorial</a>. If you have time and are interested below are some questions which although you aren't asking yourself, may make the whole binomial logistic regression concept a bit clearer for the tutorial ahead. If you aren't curious about the ins and outs, trot blindly past these questions on to the practical stuff. 
+Binomial logistic regression is a type of Generalised Linear Model (GLM). You can always give yourself a refresher on model building with <a href="(https://ourcodingclub.github.io/tutorials/model-design/)" target="_blank">this Coding Club tutorial</a>. If you have time and are interested, below are some questions which although you aren't asking yourself, may make the whole binomial logistic regression concept a bit clearer for the tutorial ahead. If you aren't curious about the ins and outs, trot blindly past these questions on to the practical stuff. 
 
 
 <details>
@@ -75,20 +75,20 @@ Coding Club has <a href="(https://ourcodingclub.github.io/tutorials/mixed-models
 <details>
 	<summary><b>Um logit link function??</b></summary>
 
-<pre>
+<p>
 
 A link function is function of the mean of the response variable (Y-axis) that we use as the response (Y-axis) instead of response variable itself. So we use the logit of the response variable (Y-axis) instead of just the response variable. 
 
 The logit function is the natural log of the odds that the response will equal 1. 
 
-</pre>
+</p>
 
 </details>
 
 <details>
 	<summary><b>Why binomial?</b></summary>
 
-	<pre>
+<p>
 Logistic regression refers to any regression model in which the response variable is categorical.   
 
 Binomial logistic regression deals with binary categorical response variables, but other types of logistic regression can deal with more than 2 categories.   
@@ -96,18 +96,18 @@ Binomial logistic regression deals with binary categorical response variables, b
 Multinomial logistic regression: Deals with response variables with three or more categories with no natural ordering among the categories (e.g. a hat trick producing nothing, a rabbit or stars).   
 
 Ordinal logistic regression: The response variable can belong to one of three or more categories and there is a natural ordering among the categories (e.g. a hat trick producing a rabbit with white, white and black spotted or black fur).
-	</pre>
+</p>
 
 </details>
 	
 <details>
 	<summary><b>What is maximum likelihood estimation?</b></summary>
 	
-<pre>
+<p>
 Logistic regression uses maximum likelihood estimation to fit a model.  
 
 In maximum likelihood estimation a set of parameters is chosen for a model that maximizes a likelihood function.
-</pre>
+</p>
 
 </details>
 
@@ -133,8 +133,7 @@ You can get all of the resources for this tutorial from <a href="https://github.
 For this tutorial we'll be looking into reproductive maturity of conifers. There is high variability in seed cone production among many northern temperate conifers, and we'll make a model to find reasons for this variation.
 
 <p align="center">
-  <img src="{{ site.baseurl }}/images/engelman_cone2.png" alt="drawing" width="30%"/>&nbsp;&nbsp;&nbsp;&nbsp;
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="{{ site.baseurl }}/images/subalpfir_cone.png" alt="drawing" width="35%" > 
+  <img src="{{ site.baseurl }}/images/engelman_cone2.png" alt="drawing" width="30%"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="{{ site.baseurl }}/images/subalpfir_cone.png" alt="drawing" width="35%" > 
 </p>
 <p align="center">
   Engleman spruce seed cones (photo credit: <a href="https://https://www.conifers.org/pi/Picea_engelmannii.php" target="_blank"> C. Earle </a>).&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Subalpine fir seed cones (photo credit: <a href="https://www.flickr.com/photos/76416226@N03/6881892262" target="_blank"> B. Leystra </a>). 
@@ -225,7 +224,7 @@ The summary() function displays a summary statistics of data for each column:
 
 -  __Count__: Estimate of tree seed cone abundance
 
-What effects conifer reproductive maturity? If cone presence is an indicator of reproductive maturity, what are the predictor and response variables available here to answer our question?
+What affects conifer reproductive maturity? If cone presence is an indicator of reproductive maturity, what are the predictor and response variables available here to answer our question?
 
 <a name="section1"></a>
 
@@ -264,7 +263,7 @@ To account for these links and avoid pseudo replication we will have to account 
 <br/>
 __Assumption 2. The response variable is binomial__
 
-Currently we only have *cone abundance* data. We will make a new response variable column, *cone presence*. Presence will be indicated by 1 and absence by 0.
+Currently we only have *cone abundance* data. We will make a new response variable column, *cone presence*. Cone presence will be indicated by 1 and cone absence by 0.
 
 ```r
 # Make abundance into P/A data
@@ -284,7 +283,7 @@ __Assumption 3. Predictor variables are independent with no multicolinearity__
 
 Predictor variables included in the model as fixed effects must be independent. Non of the predictor variables can be related to any of the others otherwise they will explain the same variation in the response variable, and the model will appear more powerful than it actually is.
 
-We will test to see if there is any correlation between them by making a correlation plot. The larger and darker the circle, the stronger the correlation between the variables. Blue colouring indicated a positive correlation and red indicated a negative correlation.
+We will test to see if there is any correlation between them by making a correlation plot. The larger and darker the circle, the stronger the correlation between the variables. Blue colouring indicates a positive correlation and red indicates a negative correlation. 
 
 ```r
 # Test continuous predictor variable autocorrelation
@@ -505,7 +504,7 @@ dbh.mod.int <- glmer(Presence ~ DBH * Spec + (1 | Plot / ID) + (1 | Year),
 And finally, compare the models you've made. We'll extract the corrected Archaic Information Criterion value, AICc, from each model. 
 -  The AICc is a number that indicates the model prediction error, so the lower the value the better the model. 
 -  AICc puts a greater penalty on the number of parameters used in a model than AIC and is particularly good for smaller datasets. However, even with larger datasets like this, the AICc value ends up converging with AIC so it's generally best just to use AICc.
--  You can only compare AICc values on models using the same dataset and predicting the same response variable.
+-  You can only compare AICc values on models that use the same dataset and are predicting the same response variable.
 
 ```r
 # Compare ur models with AICc galfriend!
@@ -680,6 +679,20 @@ plot_model(dbh.mod,
 <p align="center">
   Odds ratio plot for final model fixed effects, DBH (tree diameter at breast height) and Spec (tree species, Engleman spruce in comparison to Subalpine fir). The odds ratio is represented by the red circle and 95% confidence interval by the horizontal red line. The odds ratio value is labeled on the plot and significance represented by asterisks.
 </p>
+
+---
+header-includes:
+    - \usepackage[most]{tcolorbox}
+    - \definecolor{light-yellow}{rgb}{1, 0.95, 0.7}
+    - \newtcolorbox{myquote}{colback=light-yellow,grow to right by=-10mm,grow to left by=-10mm, boxrule=0pt,boxsep=0pt,breakable}
+    - \newcommand{\todo}[1]{\begin{myquote} \textbf{TODO:} \emph{#1} \end{myquote}}
+---
+
+blah blah
+
+\todo{something}
+
+blah
 
 We can then report :
 
