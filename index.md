@@ -680,24 +680,12 @@ plot_model(dbh.mod,
   Odds ratio plot for final model fixed effects, DBH (tree diameter at breast height) and Spec (tree species, Engleman spruce in comparison to Subalpine fir). The odds ratio is represented by the red circle and 95% confidence interval by the horizontal red line. The odds ratio value is labeled on the plot and significance represented by asterisks.
 </p>
 
-<div class="warning" style='padding:0.1em; background-color:#E9D8FD; color:#69337A'>
-<span>
-<p style='margin-top:1em; text-align:center'>
-<b>On the importance of sentence length</b></p>
-<p style='margin-left:1em;'>
-This sentence has five words. Here are five more words. Five-word sentences are fine. But several together bocome monotonous. Listen to what is happening. The writing is getting boring. The sound of it drones. It's like a stuck record. The ear demands some variety.<br><br>
-    Now listen. I vary the sentence length, and I create music. Music. The writing sings. It has a pleasent rhythm, a lilt, a harmony. I use short sentences. And I use sentences of medium length. And sometimes when I am certain the reader is rested, I will engage him with a sentence of considerable length, a sentence that burns with energy and builds with all the impetus of a crescendo, the roll of the drums, the crash of the cymbals -- sounds that say listen to this, it is important.
-</p>
-<p style='margin-bottom:1em; margin-right:1em; text-align:right; font-family:Georgia'> <b>- Gary Provost</b> <i>(100 Ways to Improve Your Writing, 1985)</i>
-</p></span>
-</div>
-
 We can then report :
 
--   A 1cm increase in tree DBH increases likelihood of cone presence by 16% (95% CI [.13, .19]; Figure 1). We can conclude tree size is a strong predictor of reproductive maturity.
--   Engleman spruce are 157% more likely to have seed cone presence than Subalpine fir (95% CI [.72, 2.84]; Figure 2).
+-   __A 1cm increase in tree DBH increases likelihood of cone presence by 16% (95% CI [.13, .19]; Figure 1). We can conclude tree size is a strong predictor of reproductive maturity.__
+-   __Engleman spruce are 157% more likely to have seed cone presence than Subalpine fir (95% CI [.72, 2.84]; Figure 2).__
 
-(The Figures in the brackets refering to graphs that illustrate these results...)
+(The 'Figure's in the brackets refering to graphs that illustrate these results...)
 <pre>
 
 </pre>
